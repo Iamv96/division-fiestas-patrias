@@ -129,7 +129,7 @@ for k in c1:
 integrantes = [
     'Pamela', 'Cote', 'Joaquín', 'Ignacio', 'Quena',
     'Ale', 'Mauri', 'Mindy', 'Monse', 'Gustavo',
-    'Coni', 'Miriam', 'Abuelo Coni', 'Mamá Mauri', 'Papá Mauri',
+    'Coni', 'Myriam', 'Abuelo Coni', 'Mamá Mauri', 'Papá Mauri',
     'Franklin'
 ]
 
@@ -145,7 +145,7 @@ for m in integrantes:
     # Asado:
     if m == 'Monse':
         consumo[m] += ['Trigo Mote (1kg)', 'Huesillos (1kg)', 'Chancaca y Azúcar', 'Restante']
-    elif m == 'Miriam':
+    elif m == 'Myriam':
         consumo[m] += [
             'Costillar Chileno', 'Costillar cerdo', 'Trutro', 'Pechuga', 
             'Carbón', 'Trigo Mote (1kg)', 'Huesillos (1kg)', 'Chancaca y Azúcar', 'Restante'

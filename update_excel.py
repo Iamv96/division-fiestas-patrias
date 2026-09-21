@@ -126,7 +126,7 @@ def update_excel(file_path):
     integrantes = [
         "Pamela", "Cote", "Joaquín", "Ignacio", "Quena",
         "Ale", "Mauri", "Mindy", "Monse", "Gustavo",
-        "Coni", "Miriam", "Abuelo Coni", "Mamá Mauri", "Papá Mauri",
+        "Coni", "Myriam", "Abuelo Coni", "Mamá Mauri", "Papá Mauri",
         "Franklin"
     ]
     
@@ -154,7 +154,7 @@ def update_excel(file_path):
             if item_num <= 13:
                 if persona == "Monse":
                     is_si = (item_num >= 10)
-                elif persona == "Miriam":
+                elif persona == "Myriam":
                     is_si = (item_num not in [1, 2, 3, 9])
                 else:
                     is_si = True

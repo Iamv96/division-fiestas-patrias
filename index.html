@@ -588,7 +588,7 @@
     const MEMBERS_DEF = [
       'Pamela', 'Cote', 'Joaquín', 'Ignacio', 'Quena',
       'Ale', 'Mauri', 'Mindy', 'Monse', 'Gustavo',
-      'Coni', 'Miriam', 'Abuelo Coni', 'Mamá Mauri', 'Papá Mauri',
+      'Coni', 'Myriam', 'Abuelo Coni', 'Mamá Mauri', 'Papá Mauri',
       'Franklin'
     ];
 
@@ -602,7 +602,7 @@
 
     // Default consumption rules:
     // Monse: Vegetariana (no carnes, no carbón, no pan choripán, no empanadas), sí mote, huesillos, chancaca/azúcar, restante
-    // Miriam: No vacuno/chorizo/pan choripán, sí costillares, pollo, carbón, mote, huesillos, chancaca/azúcar, restante
+    // Myriam: No vacuno/chorizo/pan choripán, sí costillares, pollo, carbón, mote, huesillos, chancaca/azúcar, restante
     // Empanadas: Asignadas individualmente según compra de Joaquín
     function getDefaultState() {
       const state = {};
@@ -628,7 +628,7 @@
           } else {
             if (m === 'Monse') {
               state[m][item.id] = (item.category !== 'carne');
-            } else if (m === 'Miriam') {
+            } else if (m === 'Myriam') {
               state[m][item.id] = !['chorizo', 'lomo_liso', 'lomo_vetado', 'pan'].includes(item.id);
             } else {
               state[m][item.id] = true;
@@ -658,16 +658,21 @@
     // -------------------------------------------------------------
     function init() {
       // Load matrix from localStorage or default
-      const savedMatrix = localStorage.getItem('fp_matrix_state_v7');
+      const savedMatrix = localStorage.getItem('fp_matrix_state_v8') || localStorage.getItem('fp_matrix_state_v7');
       if (savedMatrix) {
         try {
           matrixState = JSON.parse(savedMatrix);
+          // Migration from Miriam to Myriam if needed
+          if (matrixState['Miriam'] && !matrixState['Myriam']) {
+            matrixState['Myriam'] = matrixState['Miriam'];
+            delete matrixState['Miriam'];
+          }
           // Ensure all members and items exist
           MEMBERS_DEF.forEach(m => {
             if (!matrixState[m]) matrixState[m] = {};
             ITEMS_DEF.forEach(item => {
               if (typeof matrixState[m][item.id] !== 'boolean') {
-                matrixState[m][item.id] = (m !== 'Monse' && m !== 'Miriam');
+                matrixState[m][item.id] = (m !== 'Monse' && m !== 'Myriam');
               }
             });
           });
@@ -679,9 +684,15 @@
       }
 
       // Load paid status
-      const savedPaid = localStorage.getItem('fp_paid_status_v7');
+      const savedPaid = localStorage.getItem('fp_paid_status_v8') || localStorage.getItem('fp_paid_status_v7');
       if (savedPaid) {
-        try { paidStatus = JSON.parse(savedPaid); } catch (e) { paidStatus = {}; }
+        try {
+          paidStatus = JSON.parse(savedPaid);
+          if (paidStatus['Miriam'] !== undefined && paidStatus['Myriam'] === undefined) {
+            paidStatus['Myriam'] = paidStatus['Miriam'];
+            delete paidStatus['Miriam'];
+          }
+        } catch (e) { paidStatus = {}; }
       }
       MEMBERS_DEF.forEach(m => {
         if (typeof paidStatus[m] !== 'boolean') paidStatus[m] = (m === 'Ignacio');
@@ -703,12 +714,12 @@
     }
 
     function saveState() {
-      localStorage.setItem('fp_matrix_state_v7', JSON.stringify(matrixState));
-      localStorage.setItem('fp_paid_status_v7', JSON.stringify(paidStatus));
+      localStorage.setItem('fp_matrix_state_v8', JSON.stringify(matrixState));
+      localStorage.setItem('fp_paid_status_v8', JSON.stringify(paidStatus));
     }
 
     function resetToDefaults() {
-      if (confirm('¿Deseas restablecer las preferencias originales con las 5 compras?')) {
+      if (confirm('¿Deseas restablecer las preferencias originales con las compras registradas?')) {
         matrixState = getDefaultState();
         paidStatus = {};
         MEMBERS_DEF.forEach(m => paidStatus[m] = (m === 'Ignacio' || m === 'Quena'));
