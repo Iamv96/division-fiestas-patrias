@@ -772,11 +772,11 @@
 
         let extraBadgeHtml = '';
         if (isIgnacio) {
-          extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200 whitespace-nowrap shrink-0">Aportó $183.392</span>`;
+          extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 whitespace-nowrap shrink-0">Aportó $183.392</span>`;
         } else if (isMindy) {
           extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 whitespace-nowrap shrink-0">Aportó $11.790</span>`;
         } else if (isJoaquin) {
-          extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-indigo-100 text-indigo-900 border border-indigo-300 whitespace-nowrap shrink-0">Aportó $51.820</span>`;
+          extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 whitespace-nowrap shrink-0">Aportó $51.820</span>`;
         } else if (isQuena) {
           extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200 whitespace-nowrap shrink-0">Cuota cubierta por familiares</span>`;
         }
@@ -963,12 +963,10 @@
           <div class="flex items-center justify-between gap-2 sm:gap-3">
             <div class="space-y-1 min-w-0 flex-1">
               <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-                <div class="inline-flex items-center gap-1.5 flex-nowrap shrink-0">
-                  <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug whitespace-nowrap">${m}</h3>
-                  ${quenaBadgeHtml}
-                </div>
+                <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug whitespace-nowrap">${m}</h3>
                 ${extraBadgeHtml}
               </div>
+              ${quenaBadgeHtml ? `<div>${quenaBadgeHtml}</div>` : ''}
               <div>
                 ${minAmountHtml}
               </div>
