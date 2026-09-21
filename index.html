@@ -442,7 +442,7 @@
     ];
 
     const MEMBERS_DEF = [
-      'Pamela', 'Cote', 'Joaquín', 'Ignacio', 'Kena',
+      'Pamela', 'Cote', 'Joaquín', 'Ignacio', 'Quena',
       'Ale', 'Mauri', 'Mindy', 'Monse', 'Gustavo',
       'Coni', 'Miriam', 'Abuelo Coni', 'Mamá Mauri', 'Papá Mauri',
       'Franklin'
@@ -454,7 +454,7 @@
       'Joaquín': 51820
     };
 
-    const SPONSORS_KENA = ['Pamela', 'Ale', 'Mindy', 'Joaquín'];
+    const SPONSORS_QUENA = ['Pamela', 'Ale', 'Mindy', 'Joaquín'];
 
     // Default consumption rules:
     // Monse: Vegetariana (no carnes, no carbón, no pan choripán, no empanadas), sí mote, huesillos, chancaca/azúcar, restante
@@ -467,9 +467,9 @@
         ITEMS_DEF.forEach(item => {
           if (item.category === 'empanada') {
             if (item.id === 'pino_1') {
-              state[m][item.id] = ['Joaquín', 'Ignacio', 'Gustavo', 'Mauri', 'Pamela', 'Kena', 'Mindy'].includes(m);
+              state[m][item.id] = ['Joaquín', 'Ignacio', 'Gustavo', 'Mauri', 'Pamela', 'Quena', 'Mindy'].includes(m);
             } else if (item.id === 'pino_2') {
-              state[m][item.id] = ['Joaquín', 'Ignacio', 'Gustavo', 'Mauri', 'Pamela', 'Kena'].includes(m);
+              state[m][item.id] = ['Joaquín', 'Ignacio', 'Gustavo', 'Mauri', 'Pamela', 'Quena'].includes(m);
             } else if (item.id === 'mechada') {
               state[m][item.id] = ['Ale', 'Franklin'].includes(m);
             } else if (item.id === 'camaron_queso') {
@@ -542,8 +542,8 @@
       MEMBERS_DEF.forEach(m => {
         if (typeof paidStatus[m] !== 'boolean') paidStatus[m] = (m === 'Ignacio');
       });
-      // Kena pasa a verde/pagado únicamente cuando todos sus aportantes hayan pagado
-      paidStatus['Kena'] = SPONSORS_KENA.every(s => paidStatus[s]);
+      // Quena pasa a verde/pagado únicamente cuando todos sus aportantes hayan pagado
+      paidStatus['Quena'] = SPONSORS_QUENA.every(s => paidStatus[s]);
 
       // Load bank details
       const savedBank = localStorage.getItem('fp_bank_data_v7') || localStorage.getItem('fp_bank_data_v6') || localStorage.getItem('fp_bank_data_v5');
@@ -572,7 +572,7 @@
       if (confirm('¿Deseas restablecer las preferencias originales con las 5 compras?')) {
         matrixState = getDefaultState();
         paidStatus = {};
-        MEMBERS_DEF.forEach(m => paidStatus[m] = (m === 'Ignacio' || m === 'Kena'));
+        MEMBERS_DEF.forEach(m => paidStatus[m] = (m === 'Ignacio' || m === 'Quena'));
         saveState();
         recalculateAndRenderAll();
         showToast('✓ Valores restablecidos a los originales');
@@ -623,12 +623,12 @@
         grandTotalAssigned += memberTotal;
       });
 
-      // 3. Kena's quota absorption by sponsors (Pamela, Ale, Mindy, Joaquín)
-      const kenaBase = baseQuotas['Kena'] || 0;
-      const kenaSplit = kenaBase / SPONSORS_KENA.length;
+      // 3. Quena's quota absorption by sponsors (Pamela, Ale, Mindy, Joaquín)
+      const quenaBase = baseQuotas['Quena'] || 0;
+      const quenaSplit = quenaBase / SPONSORS_QUENA.length;
 
-      // Kena pasa a pagado/cubierto únicamente cuando todos sus 4 aportantes han pagado
-      paidStatus['Kena'] = SPONSORS_KENA.every(s => paidStatus[s]);
+      // Quena pasa a pagado/cubierto únicamente cuando todos sus 4 aportantes han pagado
+      paidStatus['Quena'] = SPONSORS_QUENA.every(s => paidStatus[s]);
 
       const memberQuotas = {};
       let totalPaidAmount = 0;
@@ -636,29 +636,29 @@
 
       MEMBERS_DEF.forEach(m => {
         const base = baseQuotas[m];
-        const isKena = (m === 'Kena');
-        const isSponsor = SPONSORS_KENA.includes(m);
-        const extraKena = isSponsor ? kenaSplit : 0;
+        const isQuena = (m === 'Quena');
+        const isSponsor = SPONSORS_QUENA.includes(m);
+        const extraQuena = isSponsor ? quenaSplit : 0;
 
         const roundedBase = Math.round(base);
-        const roundedExtraKena = isSponsor ? Math.round(extraKena) : 0;
+        const roundedExtraQuena = isSponsor ? Math.round(extraQuena) : 0;
         
         let exactTotal = 0;
         let roundedTotal = 0;
 
-        if (isKena) {
+        if (isQuena) {
           exactTotal = 0;
           roundedTotal = 0;
         } else {
-          exactTotal = base + extraKena;
-          roundedTotal = isSponsor ? (roundedBase + roundedExtraKena) : roundedBase;
+          exactTotal = base + extraQuena;
+          roundedTotal = isSponsor ? (roundedBase + roundedExtraQuena) : roundedBase;
         }
 
         const paidAmount = PAID_BY_MEMBER[m] || 0;
         let netToTransfer = 0;
         let netSurplus = 0;
 
-        if (m === 'Ignacio' || isKena) {
+        if (m === 'Ignacio' || isQuena) {
           netToTransfer = 0;
         } else if (m === 'Joaquín') {
           netToTransfer = 0;
@@ -670,10 +670,10 @@
         memberQuotas[m] = {
           baseExact: base,
           baseRounded: roundedBase,
-          extraKena: extraKena,
-          extraKenaRounded: roundedExtraKena,
+          extraQuena: extraQuena,
+          extraQuenaRounded: roundedExtraQuena,
           isSponsor: isSponsor,
-          isKena: isKena,
+          isQuena: isQuena,
           exact: exactTotal,
           rounded: roundedTotal,
           paidAmount: paidAmount,
@@ -748,35 +748,31 @@
         const isIgnacio = (m === 'Ignacio');
         const isMindy = (m === 'Mindy');
         const isJoaquin = (m === 'Joaquín');
-        const isKena = (m === 'Kena');
+        const isQuena = (m === 'Quena');
         const isPamelaOrAle = (m === 'Pamela' || m === 'Ale');
         const isExpanded = !!expandedCards[m];
 
         // Badge if special buyer or sponsored
         let buyerBadge = '';
         if (isIgnacio) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200">👑 Compró $183.392 • Recauda</span>`;
+          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200">Aportó $183.392</span>`;
         } else if (isMindy) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">🛒 Aportó $11.790 compras</span>`;
+          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">Aportó $11.790 en compras</span> <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-purple-100 text-purple-800 border border-purple-200">Aporta 1/4 cuota Quena</span>`;
         } else if (isJoaquin) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-indigo-100 text-indigo-900 border border-indigo-300">🛒 Aportó $51.820 • Saldo a favor</span>`;
-        } else if (isKena) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200">❤️ Cubierto por familiares</span>`;
+          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-indigo-100 text-indigo-900 border border-indigo-300">Aportó $51.820 en compras</span> <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-purple-100 text-purple-800 border border-purple-200">Aporta 1/4 cuota Quena</span>`;
+        } else if (isQuena) {
+          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200">Cuota cubierta por familiares</span>`;
         } else if (isPamelaOrAle) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-purple-100 text-purple-800 border border-purple-200">🤝 Aporta 1/4 cuota Kena</span>`;
+          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-purple-100 text-purple-800 border border-purple-200">Aporta 1/4 cuota Quena</span>`;
         }
 
         // Minimized display amount text
-        const kenaSponsorsPaidCount = SPONSORS_KENA.filter(s => paidStatus[s]).length;
-        const allKenaSponsorsPaid = (kenaSponsorsPaidCount === SPONSORS_KENA.length);
+        const quenaSponsorsPaidCount = SPONSORS_QUENA.filter(s => paidStatus[s]).length;
+        const allQuenaSponsorsPaid = (quenaSponsorsPaidCount === SPONSORS_QUENA.length);
 
         let minAmountHtml = '';
-        if (isKena) {
-          if (allKenaSponsorsPaid) {
-            minAmountHtml = `<span class="text-xs text-slate-500 font-medium">Monto a transferir a Ignacio: <strong class="text-emerald-700 font-black text-sm sm:text-base">$0 (✓ Cubierto)</strong></span>`;
-          } else {
-            minAmountHtml = `<span class="text-xs text-slate-500 font-medium">Monto a transferir a Ignacio: <strong class="text-slate-900 font-black text-sm sm:text-base">$0</strong> <span class="text-rose-600 text-xs font-semibold">(Por cubrir ${kenaSponsorsPaidCount}/4)</span></span>`;
-          }
+        if (isQuena) {
+          minAmountHtml = `<span class="text-xs text-slate-500 font-medium">Monto a transferir a Ignacio: <strong class="text-slate-900 font-black text-sm sm:text-base">$0</strong></span>`;
         } else if (isJoaquin) {
           minAmountHtml = `<span class="text-xs text-blue-800 font-medium">Saldo a favor (te transfieren): <strong class="text-blue-700 font-black text-sm sm:text-base">+${clp.format(q.netSurplus)}</strong></span>`;
         } else if (isIgnacio) {
@@ -787,11 +783,11 @@
 
         // Quota box HTML
         let quotaBoxHtml = '';
-        if (isKena) {
+        if (isQuena) {
           quotaBoxHtml = `
             <div class="space-y-1.5 text-xs">
               <div class="flex justify-between text-slate-500">
-                <span>Consumo propio (Asado + 2 pino):</span>
+                <span>Consumo propio (Asado + 2 empanadas):</span>
                 <span class="font-semibold text-slate-700">${clp.format(q.baseRounded)}</span>
               </div>
               <div class="flex justify-between text-rose-600 font-semibold border-b border-slate-200 pb-1">
@@ -811,19 +807,19 @@
           quotaBoxHtml = `
             <div class="space-y-1.5 text-xs">
               <div class="flex justify-between text-slate-500">
-                <span>Consumo personal (Asado + 1 pino):</span>
+                <span>Consumo personal (Asado + 1 empanada):</span>
                 <span class="font-semibold text-slate-700">${clp.format(q.baseRounded)}</span>
               </div>
               <div class="flex justify-between text-blue-700 font-semibold">
-                <span>+ Aporte Cuota Kena (1/4):</span>
-                <span>+${clp.format(q.extraKenaRounded)}</span>
+                <span>+ Aporte Cuota Quena (1/4):</span>
+                <span>+${clp.format(q.extraQuenaRounded)}</span>
               </div>
               <div class="flex justify-between text-slate-600 font-medium">
                 <span>Subtotal cuota:</span>
                 <span>${clp.format(q.rounded)}</span>
               </div>
               <div class="flex justify-between text-amber-700 font-semibold border-b border-slate-200 pb-1">
-                <span>- Aporte compras (Carbón+Chancaca):</span>
+                <span>- Aporte en compras (Carbón+Chancaca):</span>
                 <span>-${clp.format(q.paidAmount)}</span>
               </div>
               <div class="flex items-baseline justify-between pt-0.5">
@@ -842,15 +838,15 @@
                 <span class="font-semibold text-slate-700">${clp.format(q.baseRounded)}</span>
               </div>
               <div class="flex justify-between text-blue-700 font-semibold">
-                <span>+ Aporte Cuota Kena (1/4):</span>
-                <span>+${clp.format(q.extraKenaRounded)}</span>
+                <span>+ Aporte Cuota Quena (1/4):</span>
+                <span>+${clp.format(q.extraQuenaRounded)}</span>
               </div>
               <div class="flex justify-between text-slate-600 font-medium">
                 <span>Total cuota a pagar:</span>
                 <span>${clp.format(q.rounded)}</span>
               </div>
               <div class="flex justify-between text-indigo-700 font-semibold border-b border-slate-200 pb-1">
-                <span>- Pagado en compras (Pan + Empanadas):</span>
+                <span>- Aporte en compras (Pan + Empanadas):</span>
                 <span>-${clp.format(q.paidAmount)}</span>
               </div>
               <div class="flex items-baseline justify-between pt-1">
@@ -869,8 +865,8 @@
                 <span class="font-semibold text-slate-700">${clp.format(q.baseRounded)}</span>
               </div>
               <div class="flex justify-between text-blue-700 font-semibold border-b border-slate-200 pb-1">
-                <span>+ Aporte Cuota Kena (1/4):</span>
-                <span>+${clp.format(q.extraKenaRounded)}</span>
+                <span>+ Aporte Cuota Quena (1/4):</span>
+                <span>+${clp.format(q.extraQuenaRounded)}</span>
               </div>
               <div class="flex items-baseline justify-between pt-0.5">
                 <span class="text-xs font-bold text-slate-700">Monto a transferir a Ignacio:</span>
@@ -884,11 +880,11 @@
           quotaBoxHtml = `
             <div class="space-y-1.5 text-xs">
               <div class="flex justify-between text-slate-500">
-                <span>Tu consumo (Asado + 2 empanadas):</span>
+                <span>Consumo asado + 2 empanadas:</span>
                 <span class="font-semibold text-slate-700">${clp.format(q.baseRounded)}</span>
               </div>
               <div class="flex justify-between text-blue-700 font-semibold">
-                <span>Pusiste en compras (2 boletas):</span>
+                <span>Aporte en compras (2 boletas):</span>
                 <span>$183.392</span>
               </div>
               <div class="flex justify-between text-emerald-700 font-semibold">
@@ -922,30 +918,25 @@
         let cardBgClass = '';
         let statusBtnClass = '';
         let statusBtnText = '';
-        let statusBtnAction = '';
 
-        if (isKena) {
-          if (allKenaSponsorsPaid) {
+        if (isQuena) {
+          if (allQuenaSponsorsPaid) {
             cardBgClass = 'bg-emerald-50/40 border-emerald-300 ring-1 ring-emerald-200 hover:bg-emerald-50/70';
-            statusBtnClass = 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-600 shadow-sm';
+            statusBtnClass = 'bg-emerald-600 text-white border-emerald-600 shadow-sm';
             statusBtnText = '✓ Cubierto';
-            statusBtnAction = `event.stopPropagation(); showToast('✓ Cuota de Kena 100% cubierta por Pamela, Ale, Mindy y Joaquín.')`;
           } else {
             cardBgClass = 'bg-white border-slate-200 hover:shadow-md hover:border-slate-300';
-            statusBtnClass = 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-300';
-            statusBtnText = `⏳ Por cubrir (${kenaSponsorsPaidCount}/4)`;
-            statusBtnAction = `event.stopPropagation(); showToast('La cuota de Kena pasará a verde cuando Pamela, Ale, Mindy y Joaquín paguen (${kenaSponsorsPaidCount}/4 listos).')`;
+            statusBtnClass = 'bg-rose-50 text-rose-700 border-rose-300';
+            statusBtnText = `Por cubrir (${quenaSponsorsPaidCount}/4)`;
           }
         } else if (isJoaquin) {
           cardBgClass = isPaid ? 'bg-emerald-50/40 border-emerald-300 ring-1 ring-emerald-200 hover:bg-emerald-50/70' : 'bg-white border-slate-200 hover:shadow-md hover:border-slate-300';
-          statusBtnClass = isPaid ? 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-600 shadow-sm' : 'bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-300';
-          statusBtnText = isPaid ? '✓ Liquidado' : '💰 Saldo a Favor';
-          statusBtnAction = `event.stopPropagation(); togglePaidStatus('${m}', ${!isPaid})`;
+          statusBtnClass = isPaid ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm' : 'bg-blue-50 text-blue-700 border-blue-300';
+          statusBtnText = isPaid ? '✓ Liquidado' : 'Saldo a favor';
         } else {
           cardBgClass = isPaid ? 'bg-emerald-50/40 border-emerald-300 ring-1 ring-emerald-200 hover:bg-emerald-50/70' : 'bg-white border-slate-200 hover:shadow-md hover:border-slate-300';
-          statusBtnClass = isPaid ? 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-600 shadow-sm' : 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-300';
+          statusBtnClass = isPaid ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm' : 'bg-rose-50 text-rose-700 border-rose-300';
           statusBtnText = isPaid ? '✓ Pagado' : '⏳ Pendiente';
-          statusBtnAction = `event.stopPropagation(); togglePaidStatus('${m}', ${!isPaid})`;
         }
 
         const card = document.createElement('div');
@@ -965,13 +956,11 @@
               </div>
             </div>
 
-            <!-- Status Button & Expand Chevron -->
+            <!-- Status Badge & Expand Chevron -->
             <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-              <button type="button" 
-                      onclick="${statusBtnAction}" 
-                      class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all active:scale-95 ${statusBtnClass}">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold select-none pointer-events-none ${statusBtnClass}">
                 <span>${statusBtnText}</span>
-              </button>
+              </span>
 
               <div id="card-chevron-${m}" class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 transition-transform duration-200 ${isExpanded ? 'rotate-180 bg-blue-50 text-blue-700' : ''}">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
@@ -988,7 +977,7 @@
 
             <!-- Breakdown Accordion / Chips -->
             <div class="space-y-1.5 pt-1">
-              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Desglose de Ítems Consumidos</span>
+              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">DESGLOSE DE CONSUMO</span>
               <div class="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto pr-1">
                 ${breakdown.map(item => `
                   <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs border border-slate-200">
@@ -1100,14 +1089,14 @@
     }
 
     function togglePaidStatus(member, status) {
-      if (member === 'Kena') {
-        const kenaSponsorsPaidCount = SPONSORS_KENA.filter(s => paidStatus[s]).length;
-        showToast(`La cuota de Kena pasa a verde automáticamente cuando Pamela, Ale, Mindy y Joaquín paguen (${kenaSponsorsPaidCount}/4 listos).`);
+      if (member === 'Quena') {
+        const quenaSponsorsPaidCount = SPONSORS_QUENA.filter(s => paidStatus[s]).length;
+        showToast(`La cuota de Quena pasa a verde automáticamente cuando Pamela, Ale, Mindy y Joaquín paguen (${quenaSponsorsPaidCount}/4 listos).`);
         return;
       }
       paidStatus[member] = status;
-      // Actualizar a Kena según los aportantes
-      paidStatus['Kena'] = SPONSORS_KENA.every(s => paidStatus[s]);
+      // Actualizar a Quena según los aportantes
+      paidStatus['Quena'] = SPONSORS_QUENA.every(s => paidStatus[s]);
       saveState();
       recalculateAndRenderAll();
     }
@@ -1166,8 +1155,8 @@
         return msg;
       }
 
-      if (member === 'Kena') {
-        msg += `Hola Kena! ❤️ Te contamos que tu cuota para las Fiestas Patrias (asado y empanadas) está 100% cubierta con mucho cariño por Pamela, Ale, Mindy y Joaquín.\n\n`;
+      if (member === 'Quena') {
+        msg += `Hola Quena! ❤️ Te contamos que tu cuota para las Fiestas Patrias (asado y empanadas) está 100% cubierta con mucho cariño por Pamela, Ale, Mindy y Joaquín.\n\n`;
         msg += `🎉 *¡No tienes que transferir nada ($0)!* Solo disfrutar y celebrar en familia. 🍷🥩✨`;
         return msg;
       }
@@ -1179,7 +1168,7 @@
           msg += `• ${it.name}: ${clp.format(it.cost)}\n`;
         });
         msg += `\n📊 *Consumo personal (Asado + 2 pino):* ${clp.format(q.baseRounded)}\n`;
-        msg += `❤️ *Aporte Cuota Kena (1/4):* +${clp.format(q.extraKenaRounded)}\n`;
+        msg += `❤️ *Aporte Cuota Quena (1/4):* +${clp.format(q.extraQuenaRounded)}\n`;
         msg += `📌 *Subtotal tu cuota:* ${clp.format(q.rounded)}\n`;
         msg += `🛒 *Total aportado por ti en compras (Pan + Empanadas):* -${clp.format(q.paidAmount)}\n\n`;
         msg += `💰 *¡TIENES SALDO A FAVOR!* 🎉\n`;
@@ -1196,13 +1185,13 @@
 
       if (member === 'Mindy') {
         msg += `\n📊 *Consumo personal:* ${clp.format(q.baseRounded)}\n`;
-        msg += `❤️ *Aporte Cuota Kena (1/4):* +${clp.format(q.extraKenaRounded)}\n`;
+        msg += `❤️ *Aporte Cuota Quena (1/4):* +${clp.format(q.extraQuenaRounded)}\n`;
         msg += `📌 *Subtotal cuota:* ${clp.format(q.rounded)}\n`;
         msg += `🛒 *Menos tu aporte en compras (Carbón + Chancaca):* -${clp.format(q.paidAmount)}\n`;
         msg += `💰 *TOTAL FINAL A TRANSFERIR A IGNACIO: ${clp.format(q.netToTransfer)}*\n`;
       } else if (member === 'Pamela' || member === 'Ale') {
         msg += `\n📊 *Consumo personal:* ${clp.format(q.baseRounded)}\n`;
-        msg += `❤️ *Aporte Cuota Kena (1/4):* +${clp.format(q.extraKenaRounded)}\n`;
+        msg += `❤️ *Aporte Cuota Quena (1/4):* +${clp.format(q.extraQuenaRounded)}\n`;
         msg += `💰 *TOTAL FINAL A TRANSFERIR A IGNACIO: ${clp.format(q.netToTransfer)}*\n`;
       } else {
         msg += `\n💰 *TOTAL A TRANSFERIR A IGNACIO: ${clp.format(q.netToTransfer)}*\n`;
@@ -1236,12 +1225,12 @@
         if (m === 'Ignacio') return;
         const q = calc.memberQuotas[m];
         const statusIcon = paidStatus[m] ? '✅' : '⏳';
-        if (m === 'Kena') {
+        if (m === 'Quena') {
           msg += `• *${m}:* $0 (Cubierto con cariño por Pamela, Ale, Mindy y Joaquín ❤️)\n`;
         } else if (m === 'Joaquín') {
           msg += `• *${m}:* Saldo a favor de *+${clp.format(q.netSurplus)}* (Compró pan y empanadas; Ignacio le transfiere) 💰\n`;
         } else if (m === 'Pamela' || m === 'Ale') {
-          msg += `• *${m}:* *${clp.format(q.netToTransfer)}* (${clp.format(q.baseRounded)} consumo + ${clp.format(q.extraKenaRounded)} cuota Kena) ${statusIcon}\n`;
+          msg += `• *${m}:* *${clp.format(q.netToTransfer)}* (${clp.format(q.baseRounded)} consumo + ${clp.format(q.extraQuenaRounded)} cuota Quena) ${statusIcon}\n`;
         } else if (m === 'Mindy') {
           msg += `• *${m}:* *${clp.format(q.netToTransfer)}* (${clp.format(q.rounded)} cuota - ${clp.format(q.paidAmount)} carbón/chancaca) ${statusIcon}\n`;
         } else {

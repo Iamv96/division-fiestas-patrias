@@ -124,7 +124,7 @@ def update_excel(file_path):
     ws2 = wb.create_sheet(title="Consumo por Integrante")
     
     integrantes = [
-        "Pamela", "Cote", "Joaquín", "Ignacio", "Kena",
+        "Pamela", "Cote", "Joaquín", "Ignacio", "Quena",
         "Ale", "Mauri", "Mindy", "Monse", "Gustavo",
         "Coni", "Miriam", "Abuelo Coni", "Mamá Mauri", "Papá Mauri",
         "Franklin"
@@ -161,9 +161,9 @@ def update_excel(file_path):
             else:
                 # Empanadas
                 if item == "Pino (1a Empanada)":
-                    is_si = persona in ["Joaquín", "Ignacio", "Gustavo", "Mauri", "Pamela", "Kena", "Mindy"]
+                    is_si = persona in ["Joaquín", "Ignacio", "Gustavo", "Mauri", "Pamela", "Quena", "Mindy"]
                 elif item == "Pino (2a Empanada)":
-                    is_si = persona in ["Joaquín", "Ignacio", "Gustavo", "Mauri", "Pamela", "Kena"]
+                    is_si = persona in ["Joaquín", "Ignacio", "Gustavo", "Mauri", "Pamela", "Quena"]
                 elif item == "Mechada":
                     is_si = persona in ["Ale", "Franklin"]
                 elif item == "Camarón Queso":
@@ -203,7 +203,7 @@ def update_excel(file_path):
     ws3 = wb.create_sheet(title="División de Cuentas")
     
     headers_ws3 = [
-        "Integrante", "Consumo Propio", "Aporte Cuota Kena (1/4)", 
+        "Integrante", "Consumo Propio", "Aporte Cuota Quena (1/4)", 
         "Total Cuota a Pagar", "Aportado en Compras", "Saldo a Liquidar", 
         "Destinatario / Acción", "Estado"
     ]
@@ -214,8 +214,8 @@ def update_excel(file_path):
         cell.fill = header_fill
         cell.alignment = Alignment(horizontal="center")
         
-    sponsors_kena = ["Pamela", "Ale", "Mindy", "Joaquín"]
-    kena_row = integrantes.index("Kena") + 2
+    sponsors_quena = ["Pamela", "Ale", "Mindy", "Joaquín"]
+    quena_row = integrantes.index("Quena") + 2
     
     for r_idx, persona in enumerate(integrantes, start=2):
         ws3.cell(row=r_idx, column=1, value=persona).font = bold_font
@@ -233,21 +233,21 @@ def update_excel(file_path):
         c_exact.number_format = money_format
         c_exact.border = thin_border
         
-        # Col C: Aporte Cuota Kena (1/4)
-        if persona in sponsors_kena:
-            c_kena = ws3.cell(row=r_idx, column=3, value=f"=ROUND(B${kena_row}/4, 0)")
-            c_kena.font = Font(name="Calibri", size=11, color="1E3A8A", bold=True)
-        elif persona == "Kena":
-            c_kena = ws3.cell(row=r_idx, column=3, value=f"=-B{r_idx}")
-            c_kena.font = Font(name="Calibri", size=11, color="DC2626", bold=True)
+        # Col C: Aporte Cuota Quena (1/4)
+        if persona in sponsors_quena:
+            c_quena = ws3.cell(row=r_idx, column=3, value=f"=ROUND(B${quena_row}/4, 0)")
+            c_quena.font = Font(name="Calibri", size=11, color="1E3A8A", bold=True)
+        elif persona == "Quena":
+            c_quena = ws3.cell(row=r_idx, column=3, value=f"=-B{r_idx}")
+            c_quena.font = Font(name="Calibri", size=11, color="DC2626", bold=True)
         else:
-            c_kena = ws3.cell(row=r_idx, column=3, value=0)
-            c_kena.font = regular_font
-        c_kena.number_format = money_format
-        c_kena.border = thin_border
+            c_quena = ws3.cell(row=r_idx, column=3, value=0)
+            c_quena.font = regular_font
+        c_quena.number_format = money_format
+        c_quena.border = thin_border
         
         # Col D: Total Cuota a Pagar
-        if persona == "Kena":
+        if persona == "Quena":
             c_tot_pay = ws3.cell(row=r_idx, column=4, value=0)
         else:
             c_tot_pay = ws3.cell(row=r_idx, column=4, value=f"=B{r_idx}+C{r_idx}")
@@ -277,7 +277,7 @@ def update_excel(file_path):
             c_net.font = Font(name="Calibri", size=11, bold=True, color="1E3A8A")
             c_dest = ws3.cell(row=r_idx, column=7, value="Organizador (Recauda $193.121)")
             c_status = ws3.cell(row=r_idx, column=8, value="Organizador")
-        elif persona == "Kena":
+        elif persona == "Quena":
             c_net = ws3.cell(row=r_idx, column=6, value=0)
             c_net.font = Font(name="Calibri", size=11, bold=True, color="6B7280")
             c_dest = ws3.cell(row=r_idx, column=7, value="Cubierto por familiares")
@@ -314,11 +314,11 @@ def update_excel(file_path):
     t_propio.fill = PatternFill(start_color="FEF08A", end_color="FEF08A", fill_type="solid")
     t_propio.border = thin_border
     
-    t_kena = ws3.cell(row=tot_row, column=3, value=f"=SUM(C2:C{tot_row-1})")
-    t_kena.font = bold_font
-    t_kena.number_format = money_format
-    t_kena.fill = PatternFill(start_color="FEF08A", end_color="FEF08A", fill_type="solid")
-    t_kena.border = thin_border
+    t_quena = ws3.cell(row=tot_row, column=3, value=f"=SUM(C2:C{tot_row-1})")
+    t_quena.font = bold_font
+    t_quena.number_format = money_format
+    t_quena.fill = PatternFill(start_color="FEF08A", end_color="FEF08A", fill_type="solid")
+    t_quena.border = thin_border
 
     t_tot_pay = ws3.cell(row=tot_row, column=4, value=f"=SUM(D2:D{tot_row-1})")
     t_tot_pay.font = bold_font

@@ -127,7 +127,7 @@ for k in c1:
     tot_items[k] = c1[k] + c2[k] + c3[k] + c4[k] + c5[k]
 
 integrantes = [
-    'Pamela', 'Cote', 'Joaquín', 'Ignacio', 'Kena',
+    'Pamela', 'Cote', 'Joaquín', 'Ignacio', 'Quena',
     'Ale', 'Mauri', 'Mindy', 'Monse', 'Gustavo',
     'Coni', 'Miriam', 'Abuelo Coni', 'Mamá Mauri', 'Papá Mauri',
     'Franklin'
@@ -154,7 +154,7 @@ for m in integrantes:
         consumo[m] += list(asado_items)
     
     # Empanadas:
-    if m in ['Joaquín', 'Ignacio', 'Gustavo', 'Mauri', 'Pamela', 'Kena']:
+    if m in ['Joaquín', 'Ignacio', 'Gustavo', 'Mauri', 'Pamela', 'Quena']:
         consumo[m] += ['Pino (1a Empanada)', 'Pino (2a Empanada)']
     elif m == 'Mindy':
         consumo[m] += ['Pino (1a Empanada)']
@@ -177,30 +177,30 @@ cuotas_base = {}
 for m in integrantes:
     cuotas_base[m] = sum(valor_persona[it] for it in consumo[m])
 
-cuota_kena_exacta = cuotas_base['Kena']
-cuota_kena_split = cuota_kena_exacta / 4
-sponsors_kena = ['Pamela', 'Ale', 'Mindy', 'Joaquín']
+cuota_quena_exacta = cuotas_base['Quena']
+cuota_quena_split = cuota_quena_exacta / 4
+sponsors_quena = ['Pamela', 'Ale', 'Mindy', 'Joaquín']
 aportes = {'Ignacio': 183392, 'Mindy': 11790, 'Joaquín': 51820}
 
-print(f"Cuota de Kena: ${cuota_kena_exacta:.2f} -> ${cuota_kena_split:.2f} c/u para Pamela, Ale, Mindy y Joaquín\n")
+print(f"Cuota de Quena: ${cuota_quena_exacta:.2f} -> ${cuota_quena_split:.2f} c/u para Pamela, Ale, Mindy y Joaquín\n")
 
 total_transferencias_a_ignacio = 0
 for m in integrantes:
     base = cuotas_base[m]
-    extra_kena = cuota_kena_split if m in sponsors_kena else 0
-    tot_pagar = 0 if m == 'Kena' else (base + extra_kena)
+    extra_quena = cuota_quena_split if m in sponsors_quena else 0
+    tot_pagar = 0 if m == 'Quena' else (base + extra_quena)
     pagado = aportes.get(m, 0)
     saldo_neto = round(tot_pagar) - pagado
     
     nota = ""
-    if m in sponsors_kena:
-        nota = f"(Base ${round(base):,d} + Kena ${round(extra_kena):,d})"
-    elif m == 'Kena':
+    if m in sponsors_quena:
+        nota = f"(Base ${round(base):,d} + Quena ${round(extra_quena):,d})"
+    elif m == 'Quena':
         nota = "(Cubierto por familiares)"
     
     if m == 'Ignacio':
         accion = "Organizador (Recauda)"
-    elif m == 'Kena':
+    elif m == 'Quena':
         accion = "Cubierto"
     elif m == 'Joaquín':
         accion = f"Saldo a favor: Ignacio le transfiere ${-saldo_neto:,d}"
@@ -218,7 +218,7 @@ recuperacion_ignacio = aportes['Ignacio'] - round(cuotas_base['Ignacio'])
 print(f"Monto que recupera Ignacio para quedar en cero de sus compras: ${recuperacion_ignacio:,}")
 excedente_ignacio = total_transferencias_a_ignacio - recuperacion_ignacio
 print(f"Excedente que le sobra a Ignacio en cuenta: ${excedente_ignacio:,}")
-print(f"Monto a transferir a Joaquín: ${-(round(cuotas_base['Joaquín'] + cuota_kena_split) - aportes['Joaquín']):,}")
+print(f"Monto a transferir a Joaquín: ${-(round(cuotas_base['Joaquín'] + cuota_quena_split) - aportes['Joaquín']):,}")
 
 
 
