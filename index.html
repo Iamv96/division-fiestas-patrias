@@ -88,23 +88,33 @@
   <!-- MAIN CONTAINER -->
   <main class="w-full max-w-[98%] 2xl:max-w-[1760px] mx-auto px-3 sm:px-6 lg:px-8 py-6 flex-1 space-y-6">
 
-    <!-- KPI CARDS GRID (5 Cards) -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+    <!-- KPI CARDS GRID (6 Cards) -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
       <!-- Total Gastado -->
       <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
         <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Total Compras</p>
-        <p class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1" id="kpi-total-gastado">$200.752</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">4 boletas (Ignacio + Mindy + Joaquín)</p>
+        <p class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1" id="kpi-total-gastado">$247.002</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">5 boletas (Ignacio + Mindy + Joaquín)</p>
       </div>
 
       <!-- Carnes Total -->
       <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
         <div class="flex items-center justify-between">
-          <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Carnes, Asado & Pan</p>
+          <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Carnes & Pan</p>
           <span class="text-xs">🥩</span>
         </div>
         <p class="text-xl sm:text-2xl font-extrabold text-rose-700 mt-1" id="kpi-total-carnes">$164.762</p>
         <p class="text-[11px] text-slate-500 mt-0.5" id="kpi-pct-carnes">Carnes + Carbón + Pan</p>
+      </div>
+
+      <!-- Empanadas Joaquín -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between">
+          <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Empanadas</p>
+          <span class="text-xs">🥟</span>
+        </div>
+        <p class="text-xl sm:text-2xl font-extrabold text-emerald-700 mt-1" id="kpi-total-empanadas">$46.250</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">18 un. (Compró Joaquín)</p>
       </div>
 
       <!-- Mote & Huesillos -->
@@ -131,7 +141,7 @@
       <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-4 shadow-sm border border-emerald-200 hover:shadow-md transition-shadow">
         <div class="flex items-center justify-between">
           <p class="text-[11px] font-bold tracking-wider text-emerald-800 uppercase">Recaudado</p>
-          <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800" id="badge-pagados">0/15</span>
+          <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800" id="badge-pagados">0/16</span>
         </div>
         <p class="text-xl sm:text-2xl font-extrabold text-emerald-800 mt-1" id="kpi-total-cobrado">$0</p>
         <div class="w-full bg-emerald-200 rounded-full h-1.5 mt-2 overflow-hidden">
@@ -180,34 +190,12 @@
       <!-- THE MATRIX TABLE -->
       <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 overflow-hidden">
         <div class="overflow-x-auto table-container w-full">
-          <table class="w-full text-left border-collapse table-fixed min-w-[1250px]">
-            <colgroup>
-              <!-- 1. Integrante (15%) -->
-              <col class="w-[15%]">
-              <!-- 2-10. Carnes, Asado & Pan (9 columnas x 5.8% = 52.2%) -->
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <!-- 11-13. Mote con Huesillos (3 columnas x 5.8% = 17.4%) -->
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <col class="w-[5.8%]">
-              <!-- 14. Restante (1 columna x 5.8% = 5.8%) -->
-              <col class="w-[5.8%]">
-              <!-- 15. Cuota Total (9.6%) -->
-              <col class="w-[9.6%]">
-            </colgroup>
+          <table class="w-full text-left border-collapse min-w-[1700px]">
             <thead>
               <!-- Category Header Row -->
               <tr class="bg-slate-100/80 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
-                <th rowspan="2" class="p-3 sticky left-0 bg-slate-100 z-20 border-r border-slate-200">
-                  Integrante (15)
+                <th rowspan="2" class="p-3 sticky left-0 bg-slate-100 z-20 border-r border-slate-200 min-w-[190px]">
+                  Integrante (16)
                 </th>
                 <th colspan="9" class="p-2 text-center bg-rose-50/70 border-r border-slate-200 text-rose-900">
                   🥩 Carnes, Asado & Pan ($164.762)
@@ -218,7 +206,10 @@
                 <th class="p-2 text-center bg-blue-50/70 border-r border-slate-200 text-blue-900">
                   🥤 Restante ($19.120)
                 </th>
-                <th rowspan="2" class="p-3 text-right bg-slate-100 z-20 border-l border-slate-200">
+                <th colspan="6" class="p-2 text-center bg-emerald-50/70 border-r border-slate-200 text-emerald-900">
+                  🥟 Empanadas Joaquín ($46.250)
+                </th>
+                <th rowspan="2" class="p-3 text-right bg-slate-100 z-20 border-l border-slate-200 min-w-[130px]">
                   Cuota Total
                 </th>
               </tr>
@@ -229,7 +220,7 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 text-sm" id="matrix-body">
-              <!-- Dynamically populated rows for 15 members -->
+              <!-- Dynamically populated rows for 16 members -->
             </tbody>
             <tfoot>
               <tr class="bg-slate-100/90 font-bold border-t-2 border-slate-300 text-xs sm:text-sm text-slate-800" id="matrix-footer">
@@ -251,10 +242,10 @@
         <div class="flex flex-wrap items-center gap-2">
           <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Filtrar:</span>
           <button onclick="setCardFilter('all')" id="filter-all" class="card-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-chileBlue text-white shadow-sm">
-            Todos (<span id="count-filter-all">15</span>)
+            Todos (<span id="count-filter-all">16</span>)
           </button>
           <button onclick="setCardFilter('pending')" id="filter-pending" class="card-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            Pendientes (<span id="count-filter-pending">15</span>)
+            Pendientes (<span id="count-filter-pending">16</span>)
           </button>
           <button onclick="setCardFilter('paid')" id="filter-paid" class="card-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
             Pagados (<span id="count-filter-paid">0</span>)
@@ -323,6 +314,7 @@
                 <th class="p-3 text-right">Compra 2 (Ignacio)</th>
                 <th class="p-3 text-right text-amber-700">Compra 3 (Mindy)</th>
                 <th class="p-3 text-right text-indigo-700">Compra 4 (Joaquín)</th>
+                <th class="p-3 text-right text-emerald-700">Compra 5 (Empanadas)</th>
                 <th class="p-3 text-right">Total Gastado</th>
                 <th class="p-3 text-center">Consumidores Activos</th>
                 <th class="p-3 text-right">Cuota Unitaria Actual</th>
@@ -338,9 +330,10 @@
                 <td class="p-3 text-right text-blue-900" id="c2-total-display">$61.141</td>
                 <td class="p-3 text-right text-amber-700" id="c3-total-display">$11.790</td>
                 <td class="p-3 text-right text-indigo-700" id="c4-total-display">$5.570</td>
-                <td class="p-3 text-right text-emerald-700 text-base" id="total-compras-display">$200.752</td>
+                <td class="p-3 text-right text-emerald-700" id="c5-total-display">$46.250</td>
+                <td class="p-3 text-right text-emerald-700 text-base" id="total-compras-display">$247.002</td>
                 <td class="p-3 text-center">-</td>
-                <td class="p-3 text-right text-emerald-700 text-base" id="total-cuotas-display">$200.752</td>
+                <td class="p-3 text-right text-emerald-700 text-base" id="total-cuotas-display">$247.002</td>
               </tr>
             </tfoot>
           </table>
@@ -425,54 +418,75 @@
     // DATA DEFINITIONS & INITIAL STATE
     // -------------------------------------------------------------
     const ITEMS_DEF = [
-      { id: 'chorizo', name: 'Chorizo', category: 'carne', c1: 14670, c2: 4890, c3: 0, c4: 0, total: 19560, icon: '🌭' },
-      { id: 'lomo_liso', name: 'Lomo Liso', category: 'carne', c1: 21226, c2: 0, c3: 0, c4: 0, total: 21226, icon: '🥩' },
-      { id: 'lomo_vetado', name: 'Lomo Vetado', category: 'carne', c1: 19560, c2: 33693, c3: 0, c4: 0, total: 53253, icon: '🥩' },
-      { id: 'costillar_chileno', name: 'Costillar Chileno', category: 'carne', c1: 19238, c2: 0, c3: 0, c4: 0, total: 19238, icon: '🍖' },
-      { id: 'costillar_cerdo', name: 'Costillar Cerdo', category: 'carne', c1: 14957, c2: 0, c3: 0, c4: 0, total: 14957, icon: '🍖' },
-      { id: 'trutro', name: 'Trutro Pollo', category: 'carne', c1: 0, c2: 16353, c3: 0, c4: 0, total: 16353, icon: '🍗' },
-      { id: 'pechuga', name: 'Pechuga Pollo', category: 'carne', c1: 0, c2: 6205, c3: 0, c4: 0, total: 6205, icon: '🍗' },
-      { id: 'carbon', name: 'Carbón', category: 'carne', c1: 0, c2: 0, c3: 8400, c4: 0, total: 8400, icon: '🪵' },
-      { id: 'pan', name: 'Pan Choripán', category: 'carne', c1: 0, c2: 0, c3: 0, c4: 5570, total: 5570, icon: '🥖' },
-      { id: 'mote', name: 'Trigo Mote (1kg)', category: 'mote', c1: 2490, c2: 0, c3: 0, c4: 0, total: 2490, icon: '🌾' },
-      { id: 'huesillos', name: 'Huesillos (1kg)', category: 'mote', c1: 10990, c2: 0, c3: 0, c4: 0, total: 10990, icon: '🍑' },
-      { id: 'chancaca_azucar', name: 'Chancaca y Azúcar', category: 'mote', c1: 0, c2: 0, c3: 3390, c4: 0, total: 3390, icon: '🍯' },
-      { id: 'restante', name: 'Restante', category: 'restante', c1: 19120, c2: 0, c3: 0, c4: 0, total: 19120, icon: '🥤' }
+      { id: 'chorizo', name: 'Chorizo', category: 'carne', c1: 14670, c2: 4890, c3: 0, c4: 0, c5: 0, total: 19560, icon: '🌭' },
+      { id: 'lomo_liso', name: 'Lomo Liso', category: 'carne', c1: 21226, c2: 0, c3: 0, c4: 0, c5: 0, total: 21226, icon: '🥩' },
+      { id: 'lomo_vetado', name: 'Lomo Vetado', category: 'carne', c1: 19560, c2: 33693, c3: 0, c4: 0, c5: 0, total: 53253, icon: '🥩' },
+      { id: 'costillar_chileno', name: 'Costillar Chileno', category: 'carne', c1: 19238, c2: 0, c3: 0, c4: 0, c5: 0, total: 19238, icon: '🍖' },
+      { id: 'costillar_cerdo', name: 'Costillar Cerdo', category: 'carne', c1: 14957, c2: 0, c3: 0, c4: 0, c5: 0, total: 14957, icon: '🍖' },
+      { id: 'trutro', name: 'Trutro Pollo', category: 'carne', c1: 0, c2: 16353, c3: 0, c4: 0, c5: 0, total: 16353, icon: '🍗' },
+      { id: 'pechuga', name: 'Pechuga Pollo', category: 'carne', c1: 0, c2: 6205, c3: 0, c4: 0, c5: 0, total: 6205, icon: '🍗' },
+      { id: 'carbon', name: 'Carbón', category: 'carne', c1: 0, c2: 0, c3: 8400, c4: 0, c5: 0, total: 8400, icon: '🪵' },
+      { id: 'pan', name: 'Pan Choripán', category: 'carne', c1: 0, c2: 0, c3: 0, c4: 5570, c5: 0, total: 5570, icon: '🥖' },
+      { id: 'mote', name: 'Trigo Mote (1kg)', category: 'mote', c1: 2490, c2: 0, c3: 0, c4: 0, c5: 0, total: 2490, icon: '🌾' },
+      { id: 'huesillos', name: 'Huesillos (1kg)', category: 'mote', c1: 10990, c2: 0, c3: 0, c4: 0, c5: 0, total: 10990, icon: '🍑' },
+      { id: 'chancaca_azucar', name: 'Chancaca y Azúcar', category: 'mote', c1: 0, c2: 0, c3: 3390, c4: 0, c5: 0, total: 3390, icon: '🍯' },
+      { id: 'restante', name: 'Restante', category: 'restante', c1: 19120, c2: 0, c3: 0, c4: 0, c5: 0, total: 19120, icon: '🥤' },
+      { id: 'pino_1', name: 'Pino (1ª)', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 17500, total: 17500, icon: '🥟' },
+      { id: 'pino_2', name: 'Pino (2ª)', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 15000, total: 15000, icon: '🥟' },
+      { id: 'mechada', name: 'Mechada Queso', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 6000, total: 6000, icon: '🥟' },
+      { id: 'camaron_queso', name: 'Camarón Queso', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 3000, total: 3000, icon: '🥟' },
+      { id: 'queso', name: 'Empanada Queso', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 2250, total: 2250, icon: '🥟' },
+      { id: 'napolitana', name: 'Napolitana', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 2500, total: 2500, icon: '🥟' }
     ];
 
     const MEMBERS_DEF = [
       'Pamela', 'Cote', 'Joaquín', 'Ignacio', 'Kena',
       'Ale', 'Mauri', 'Mindy', 'Monse', 'Gustavo',
-      'Coni', 'Miriam', 'Abuelo Coni', 'Mamá Mauri', 'Papá Mauri'
+      'Coni', 'Miriam', 'Abuelo Coni', 'Mamá Mauri', 'Papá Mauri',
+      'Franklin'
     ];
 
     const PAID_BY_MEMBER = {
       'Ignacio': 183392,
       'Mindy': 11790,
-      'Joaquín': 5570
+      'Joaquín': 51820
     };
 
     const SPONSORS_KENA = ['Pamela', 'Ale', 'Mindy', 'Joaquín'];
 
     // Default consumption rules:
-    // Monse: Vegetariana (no carnes, no carbón, no pan choripán), sí mote, huesillos, chancaca/azúcar, restante
+    // Monse: Vegetariana (no carnes, no carbón, no pan choripán, no empanadas), sí mote, huesillos, chancaca/azúcar, restante
     // Miriam: No vacuno/chorizo/pan choripán, sí costillares, pollo, carbón, mote, huesillos, chancaca/azúcar, restante
-    // Others: Todos comen todo
+    // Empanadas: Asignadas individualmente según compra de Joaquín
     function getDefaultState() {
       const state = {};
       MEMBERS_DEF.forEach(m => {
         state[m] = {};
         ITEMS_DEF.forEach(item => {
-          if (m === 'Monse') {
-            state[m][item.id] = (item.category !== 'carne');
-          } else if (m === 'Miriam') {
-            if (['chorizo', 'lomo_liso', 'lomo_vetado', 'pan'].includes(item.id)) {
+          if (item.category === 'empanada') {
+            if (item.id === 'pino_1') {
+              state[m][item.id] = ['Joaquín', 'Ignacio', 'Gustavo', 'Mauri', 'Pamela', 'Kena', 'Mindy'].includes(m);
+            } else if (item.id === 'pino_2') {
+              state[m][item.id] = ['Joaquín', 'Ignacio', 'Gustavo', 'Mauri', 'Pamela', 'Kena'].includes(m);
+            } else if (item.id === 'mechada') {
+              state[m][item.id] = ['Ale', 'Franklin'].includes(m);
+            } else if (item.id === 'camaron_queso') {
+              state[m][item.id] = (m === 'Franklin');
+            } else if (item.id === 'queso') {
+              state[m][item.id] = (m === 'Cote');
+            } else if (item.id === 'napolitana') {
+              state[m][item.id] = (m === 'Cote');
+            } else {
               state[m][item.id] = false;
+            }
+          } else {
+            if (m === 'Monse') {
+              state[m][item.id] = (item.category !== 'carne');
+            } else if (m === 'Miriam') {
+              state[m][item.id] = !['chorizo', 'lomo_liso', 'lomo_vetado', 'pan'].includes(item.id);
             } else {
               state[m][item.id] = true;
             }
-          } else {
-            state[m][item.id] = true;
           }
         });
       });
@@ -497,7 +511,7 @@
     // -------------------------------------------------------------
     function init() {
       // Load matrix from localStorage or default
-      const savedMatrix = localStorage.getItem('fp_matrix_state_v6');
+      const savedMatrix = localStorage.getItem('fp_matrix_state_v7');
       if (savedMatrix) {
         try {
           matrixState = JSON.parse(savedMatrix);
@@ -506,7 +520,7 @@
             if (!matrixState[m]) matrixState[m] = {};
             ITEMS_DEF.forEach(it => {
               if (typeof matrixState[m][it.id] !== 'boolean') {
-                matrixState[m][it.id] = (m === 'Monse' && it.category === 'carne') ? false : true;
+                matrixState[m][it.id] = (m === 'Monse' && (it.category === 'carne' || it.category === 'empanada')) ? false : true;
               }
             });
           });
@@ -518,7 +532,7 @@
       }
 
       // Load paid status
-      const savedPaid = localStorage.getItem('fp_paid_status_v6');
+      const savedPaid = localStorage.getItem('fp_paid_status_v7');
       if (savedPaid) {
         try { paidStatus = JSON.parse(savedPaid); } catch (e) { paidStatus = {}; }
       }
@@ -527,7 +541,7 @@
       });
 
       // Load bank details
-      const savedBank = localStorage.getItem('fp_bank_data_v6') || localStorage.getItem('fp_bank_data_v5') || localStorage.getItem('fp_bank_data_v4');
+      const savedBank = localStorage.getItem('fp_bank_data_v7') || localStorage.getItem('fp_bank_data_v6') || localStorage.getItem('fp_bank_data_v5');
       if (savedBank) {
         try { bankData = JSON.parse(savedBank); } catch (e) {}
       }
@@ -547,12 +561,12 @@
     }
 
     function saveState() {
-      localStorage.setItem('fp_matrix_state_v6', JSON.stringify(matrixState));
-      localStorage.setItem('fp_paid_status_v6', JSON.stringify(paidStatus));
+      localStorage.setItem('fp_matrix_state_v7', JSON.stringify(matrixState));
+      localStorage.setItem('fp_paid_status_v7', JSON.stringify(paidStatus));
     }
 
     function resetToDefaults() {
-      if (confirm('¿Deseas restablecer las preferencias originales con las 4 compras?')) {
+      if (confirm('¿Deseas restablecer las preferencias originales con las 5 compras?')) {
         matrixState = getDefaultState();
         paidStatus = {};
         MEMBERS_DEF.forEach(m => paidStatus[m] = (m === 'Ignacio' || m === 'Kena'));
@@ -636,9 +650,13 @@
 
         const paidAmount = PAID_BY_MEMBER[m] || 0;
         let netToTransfer = 0;
+        let netSurplus = 0;
 
         if (m === 'Ignacio' || isKena) {
           netToTransfer = 0;
+        } else if (m === 'Joaquín') {
+          netToTransfer = 0;
+          netSurplus = Math.max(0, paidAmount - roundedTotal);
         } else {
           netToTransfer = Math.max(0, roundedTotal - paidAmount);
         }
@@ -653,7 +671,8 @@
           exact: exactTotal,
           rounded: roundedTotal,
           paidAmount: paidAmount,
-          netToTransfer: netToTransfer
+          netToTransfer: netToTransfer,
+          netSurplus: netSurplus
         };
 
         if (paidStatus[m]) {
@@ -715,10 +734,10 @@
     }
 
     function renderKPIs(calc) {
-      // Total a recaudar para Ignacio = 183.392 (suma de transferencias de los otros 14)
-      const totalToCollect = 183392;
+      // Total a recaudar para Ignacio = 193.121 (suma de transferencias de los 13 con saldo a pagar)
+      const totalToCollect = 193121;
       document.getElementById('kpi-total-cobrado').textContent = clp.format(calc.totalPaidAmount);
-      document.getElementById('badge-pagados').textContent = `${calc.paidCount}/15`;
+      document.getElementById('badge-pagados').textContent = `${calc.paidCount}/16`;
       const pct = totalToCollect > 0 ? Math.min(100, (calc.totalPaidAmount / totalToCollect) * 100) : 0;
       document.getElementById('progress-cobrado').style.width = `${pct}%`;
 
@@ -844,8 +863,8 @@
       fHtml += `
         <td class="p-4 text-right bg-slate-100 border-l border-slate-200">
           <div class="text-base text-emerald-700 font-extrabold">${clp.format(Math.round(calc.grandTotalAssigned))}</div>
-          <div class="text-[10px] ${Math.abs(calc.grandTotalAssigned - 200752) < 5 ? 'text-emerald-700 font-bold' : 'text-rose-600 font-bold'}">
-            ${Math.abs(calc.grandTotalAssigned - 200752) < 5 ? '✓ 100% Cuadrado' : 'Ajustar comensales'}
+          <div class="text-[10px] ${Math.abs(calc.grandTotalAssigned - 247002) < 5 ? 'text-emerald-700 font-bold' : 'text-rose-600 font-bold'}">
+            ${Math.abs(calc.grandTotalAssigned - 247002) < 5 ? '✓ 100% Cuadrado' : 'Ajustar comensales'}
           </div>
         </td>
       `;
@@ -883,11 +902,11 @@
         // Badge if special buyer or sponsored
         let buyerBadge = '';
         if (isIgnacio) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200">👑 Compró $183.392 (Recibe)</span>`;
+          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200">👑 Compró $183.392 • Recauda y liquida</span>`;
         } else if (isMindy) {
           buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">🛒 Aportó $11.790 en compras (Carbón+Chancaca)</span>`;
         } else if (isJoaquin) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-indigo-100 text-indigo-900 border border-indigo-300">🛒 Aportó $5.570 en pan choripán</span>`;
+          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-indigo-100 text-indigo-900 border border-indigo-300">🛒 Aportó $51.820 (Pan + Empanadas) • Saldo a favor</span>`;
         } else if (isKena) {
           buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200">❤️ Cuota cubierta por familiares</span>`;
         } else if (isPamelaOrAle) {
@@ -900,7 +919,7 @@
           quotaBoxHtml = `
             <div class="space-y-1 text-xs">
               <div class="flex justify-between text-slate-500">
-                <span>Consumo propio:</span>
+                <span>Consumo propio (Asado + 2 pino):</span>
                 <span class="font-semibold text-slate-700">${clp.format(q.baseRounded)}</span>
               </div>
               <div class="flex justify-between text-rose-600 font-semibold border-b border-slate-200 pb-1">
@@ -920,7 +939,7 @@
           quotaBoxHtml = `
             <div class="space-y-1 text-xs">
               <div class="flex justify-between text-slate-500">
-                <span>Consumo personal:</span>
+                <span>Consumo personal (Asado + 1 pino):</span>
                 <span class="font-semibold text-slate-700">${clp.format(q.baseRounded)}</span>
               </div>
               <div class="flex justify-between text-blue-700 font-semibold">
@@ -947,7 +966,7 @@
           quotaBoxHtml = `
             <div class="space-y-1 text-xs">
               <div class="flex justify-between text-slate-500">
-                <span>Consumo personal:</span>
+                <span>Consumo asado + 2 empanadas:</span>
                 <span class="font-semibold text-slate-700">${clp.format(q.baseRounded)}</span>
               </div>
               <div class="flex justify-between text-blue-700 font-semibold">
@@ -955,17 +974,17 @@
                 <span>+${clp.format(q.extraKenaRounded)}</span>
               </div>
               <div class="flex justify-between text-slate-600 font-medium">
-                <span>Subtotal cuota:</span>
+                <span>Total cuota a pagar:</span>
                 <span>${clp.format(q.rounded)}</span>
               </div>
               <div class="flex justify-between text-indigo-700 font-semibold border-b border-slate-200 pb-1">
-                <span>- Aporte compras (Pan choripán):</span>
+                <span>- Pagado en compras (Pan + Empanadas):</span>
                 <span>-${clp.format(q.paidAmount)}</span>
               </div>
-              <div class="flex items-baseline justify-between pt-0.5">
-                <span class="text-xs font-bold text-slate-700">Saldo a transferir a Ignacio:</span>
+              <div class="flex items-baseline justify-between pt-1">
+                <span class="text-xs font-bold text-blue-800">Saldo a favor (Ignacio te transfiere):</span>
                 <div class="text-right">
-                  <span class="text-2xl font-black text-emerald-700">${clp.format(q.netToTransfer)}</span>
+                  <span class="text-2xl font-black text-blue-700">+${clp.format(q.netSurplus)}</span>
                 </div>
               </div>
             </div>
@@ -992,14 +1011,29 @@
           `;
         } else if (isIgnacio) {
           quotaBoxHtml = `
-            <div class="flex items-baseline justify-between">
-              <div>
-                <span class="text-xs font-semibold text-slate-500">Tu Consumo:</span>
-                <span class="block text-[10px] text-slate-400">Pusiste $183.392 (2 boletas)</span>
+            <div class="space-y-1 text-xs">
+              <div class="flex justify-between text-slate-500">
+                <span>Tu consumo (Asado + 2 empanadas):</span>
+                <span class="font-semibold text-slate-700">${clp.format(q.baseRounded)}</span>
               </div>
-              <div class="text-right">
-                <span class="text-2xl font-black text-blue-900">${clp.format(q.baseRounded)}</span>
-                <span class="block text-[10px] text-emerald-700 font-bold">Recibes transferencias</span>
+              <div class="flex justify-between text-blue-700 font-semibold">
+                <span>Pusiste en compras (2 boletas):</span>
+                <span>$183.392</span>
+              </div>
+              <div class="flex justify-between text-emerald-700 font-semibold">
+                <span>Recaudas de 13 familiares:</span>
+                <span>+$193.121</span>
+              </div>
+              <div class="flex justify-between text-amber-700 font-semibold border-b border-slate-200 pb-1">
+                <span>Transfieres a Joaquín (saldo a su favor):</span>
+                <span>-$28.435</span>
+              </div>
+              <div class="flex items-baseline justify-between pt-1">
+                <span class="text-xs font-bold text-slate-700">Recuperación neta compras:</span>
+                <div class="text-right">
+                  <span class="text-2xl font-black text-emerald-700">$164.684</span>
+                  <span class="block text-[10px] text-emerald-700 font-bold">¡Quedas 100% saldado!</span>
+                </div>
               </div>
             </div>
           `;
@@ -1041,7 +1075,7 @@
                           ? 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-600 shadow-sm' 
                           : 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-300'
                       }">
-                <span>${isKena ? '✓ Cubierto' : isPaid ? '✓ Pagado' : '⏳ Pendiente'}</span>
+                <span>${isKena ? '✓ Cubierto' : isJoaquin ? (isPaid ? '✓ Liquidado' : '💰 Saldo a Favor') : isPaid ? '✓ Pagado' : '⏳ Pendiente'}</span>
               </button>
             </div>
 
@@ -1110,10 +1144,11 @@
           <td class="p-3 text-right text-slate-600">${item.c2 > 0 ? clp.format(item.c2) : '-'}</td>
           <td class="p-3 text-right text-amber-700 font-medium">${item.c3 > 0 ? clp.format(item.c3) : '-'}</td>
           <td class="p-3 text-right text-indigo-700 font-medium">${item.c4 > 0 ? clp.format(item.c4) : '-'}</td>
+          <td class="p-3 text-right text-emerald-700 font-medium">${item.c5 > 0 ? clp.format(item.c5) : '-'}</td>
           <td class="p-3 text-right font-bold text-slate-900">${clp.format(item.total)}</td>
           <td class="p-3 text-center">
             <span class="inline-flex px-2 py-0.5 rounded-full text-xs font-bold ${count > 0 ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'}">
-              ${count} de 15
+              ${count} de 16
             </span>
           </td>
           <td class="p-3 text-right font-bold text-emerald-700">${clp.format(perPerson)}</td>
@@ -1141,8 +1176,11 @@
     }
 
     function setMemberPreset(member, preset) {
+      const defState = getDefaultState();
       ITEMS_DEF.forEach(item => {
-        if (preset === 'all') {
+        if (item.category === 'empanada') {
+          matrixState[member][item.id] = (preset === 'none') ? false : defState[member][item.id];
+        } else if (preset === 'all') {
           matrixState[member][item.id] = true;
         } else if (preset === 'veg') {
           matrixState[member][item.id] = (item.category !== 'carne');
@@ -1220,14 +1258,32 @@
         msg += `Hola Ignacio! 👋 Eres el organizador de las compras dieciocheras.\n\n`;
         msg += `🛒 *Total aportado de tu bolsillo:* $183.392 (2 boletas)\n`;
         msg += `🥩 *Tu consumo personal:* ${clp.format(q.baseRounded)}\n`;
-        msg += `💰 *Monto total a recibir de la familia:* $168.677\n\n`;
-        msg += `¡Todo listo para cuadrar las cuentas sin enredos! 🎉`;
+        msg += `💰 *Monto a recuperar de tus compras:* $164.684\n`;
+        msg += `📥 *Total a recaudar de la familia (13 personas):* $193.121\n`;
+        msg += `📤 *Transferencia que le haces a Joaquín (saldo a su favor):* $28.435\n\n`;
+        msg += `¡Todo cuadrado al peso sin transferencias cruzadas! 🎉`;
         return msg;
       }
 
       if (member === 'Kena') {
-        msg += `Hola Kena! ❤️ Te contamos que tu cuota para las Fiestas Patrias está 100% cubierta con mucho cariño por Pamela, Ale, Mindy y Joaquín.\n\n`;
+        msg += `Hola Kena! ❤️ Te contamos que tu cuota para las Fiestas Patrias (asado y empanadas) está 100% cubierta con mucho cariño por Pamela, Ale, Mindy y Joaquín.\n\n`;
         msg += `🎉 *¡No tienes que transferir nada ($0)!* Solo disfrutar y celebrar en familia. 🍷🥩✨`;
+        return msg;
+      }
+
+      if (member === 'Joaquín') {
+        msg += `Hola Joaquín! 👋 Te comparto el detalle de tus cuentas:\n\n`;
+        msg += `📋 *Tus ítems consumidos:*\n`;
+        breakdown.forEach(it => {
+          msg += `• ${it.name}: ${clp.format(it.cost)}\n`;
+        });
+        msg += `\n📊 *Consumo personal (Asado + 2 pino):* ${clp.format(q.baseRounded)}\n`;
+        msg += `❤️ *Aporte Cuota Kena (1/4):* +${clp.format(q.extraKenaRounded)}\n`;
+        msg += `📌 *Subtotal tu cuota:* ${clp.format(q.rounded)}\n`;
+        msg += `🛒 *Total aportado por ti en compras (Pan + Empanadas):* -${clp.format(q.paidAmount)}\n\n`;
+        msg += `💰 *¡TIENES SALDO A FAVOR!* 🎉\n`;
+        msg += `Ignacio te transferirá directamente: *${clp.format(q.netSurplus)}* una vez recaudados los pagos.\n`;
+        msg += `¡Muchas gracias por las empanadas y el pan! 🥟🥖✨`;
         return msg;
       }
 
@@ -1242,12 +1298,6 @@
         msg += `❤️ *Aporte Cuota Kena (1/4):* +${clp.format(q.extraKenaRounded)}\n`;
         msg += `📌 *Subtotal cuota:* ${clp.format(q.rounded)}\n`;
         msg += `🛒 *Menos tu aporte en compras (Carbón + Chancaca):* -${clp.format(q.paidAmount)}\n`;
-        msg += `💰 *TOTAL FINAL A TRANSFERIR A IGNACIO: ${clp.format(q.netToTransfer)}*\n`;
-      } else if (member === 'Joaquín') {
-        msg += `\n📊 *Consumo personal:* ${clp.format(q.baseRounded)}\n`;
-        msg += `❤️ *Aporte Cuota Kena (1/4):* +${clp.format(q.extraKenaRounded)}\n`;
-        msg += `📌 *Subtotal cuota:* ${clp.format(q.rounded)}\n`;
-        msg += `🛒 *Menos tu aporte en compras (Pan choripán):* -${clp.format(q.paidAmount)}\n`;
         msg += `💰 *TOTAL FINAL A TRANSFERIR A IGNACIO: ${clp.format(q.netToTransfer)}*\n`;
       } else if (member === 'Pamela' || member === 'Ale') {
         msg += `\n📊 *Consumo personal:* ${clp.format(q.baseRounded)}\n`;
@@ -1278,7 +1328,7 @@
     function copyGroupWhatsAppSummary() {
       const calc = calculate();
       let msg = `🇨🇱 *RESUMEN DE CUOTAS FIESTAS PATRIAS* 🇨🇱\n\n`;
-      msg += `Hola familia! Ya tenemos la división exacta de todas las compras dieciocheras ($200.752 en total):\n\n`;
+      msg += `Hola familia! Ya tenemos la división exacta de todas las compras dieciocheras ($247.002 en 5 compras):\n\n`;
       msg += `👥 *Cuota por persona a transferir a Ignacio:*\n`;
 
       MEMBERS_DEF.forEach(m => {
@@ -1287,18 +1337,18 @@
         const statusIcon = paidStatus[m] ? '✅' : '⏳';
         if (m === 'Kena') {
           msg += `• *${m}:* $0 (Cubierto con cariño por Pamela, Ale, Mindy y Joaquín ❤️)\n`;
+        } else if (m === 'Joaquín') {
+          msg += `• *${m}:* Saldo a favor de *+${clp.format(q.netSurplus)}* (Compró pan y empanadas; Ignacio le transfiere) 💰\n`;
         } else if (m === 'Pamela' || m === 'Ale') {
           msg += `• *${m}:* *${clp.format(q.netToTransfer)}* (${clp.format(q.baseRounded)} consumo + ${clp.format(q.extraKenaRounded)} cuota Kena) ${statusIcon}\n`;
         } else if (m === 'Mindy') {
-          msg += `• *${m}:* *${clp.format(q.netToTransfer)}* (${clp.format(q.rounded)} cuota - ${clp.format(q.paidAmount)} compras) ${statusIcon}\n`;
-        } else if (m === 'Joaquín') {
-          msg += `• *${m}:* *${clp.format(q.netToTransfer)}* (${clp.format(q.rounded)} cuota - ${clp.format(q.paidAmount)} pan) ${statusIcon}\n`;
+          msg += `• *${m}:* *${clp.format(q.netToTransfer)}* (${clp.format(q.rounded)} cuota - ${clp.format(q.paidAmount)} carbón/chancaca) ${statusIcon}\n`;
         } else {
           msg += `• *${m}:* *${clp.format(q.netToTransfer)}* ${statusIcon}\n`;
         }
       });
 
-      msg += `\n💵 *Total a transferir a la cuenta de Ignacio:* $168.677 (más su consumo propio de $14.715 = $183.392 para reembolsar sus compras al 100%)\n`;
+      msg += `\n💵 *Cuentas Claras:* Todos le transfieren únicamente a Ignacio ($193.121 en total). Ignacio recupera sus compras ($164.684) y le transfiere el saldo a favor a Joaquín ($28.435).\n`;
       msg += buildBankText();
       msg += `\n\n¡Por favor avisar al transferir para ir marcando la lista! Gracias a todos! 🇨🇱🎉`;
 
@@ -1327,7 +1377,7 @@
         account: document.getElementById('bank-account').value.trim(),
         email: document.getElementById('bank-email').value.trim()
       };
-      localStorage.setItem('fp_bank_data_v6', JSON.stringify(bankData));
+      localStorage.setItem('fp_bank_data_v7', JSON.stringify(bankData));
       closeBankModal();
       showToast('✓ Datos bancarios guardados correctamente');
     }
@@ -1358,10 +1408,10 @@
         categoryChartInstance = new Chart(catCtx, {
           type: 'doughnut',
           data: {
-            labels: ['Carnes, Asado & Pan', 'Mote c/ Huesillo (con Chancaca)', 'Restante'],
+            labels: ['Carnes, Asado & Pan', 'Empanadas (Joaquín)', 'Mote c/ Huesillo', 'Restante'],
             datasets: [{
-              data: [164762, 16870, 19120],
-              backgroundColor: ['#D62828', '#F59E0B', '#3B82F6'],
+              data: [164762, 46250, 16870, 19120],
+              backgroundColor: ['#D62828', '#10B981', '#F59E0B', '#3B82F6'],
               borderWidth: 2,
               borderColor: '#ffffff'
             }]

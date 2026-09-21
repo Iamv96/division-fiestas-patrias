@@ -32,26 +32,30 @@ def update_excel(file_path):
     ws1["B2"] = 61141
     ws1["A3"] = "Total tercera compra (Mindy)"
     ws1["B3"] = 11790
-    ws1["A4"] = "Total cuarta compra (Joaquín)"
+    ws1["A4"] = "Total cuarta compra (Joaquín - Pan choripán)"
     ws1["B4"] = 5570
+    ws1["A5"] = "Total quinta compra (Joaquín - Empanadas)"
+    ws1["B5"] = 46250
     
-    for r in range(1, 5):
+    for r in range(1, 6):
         ws1[f"A{r}"].font = bold_font
         ws1[f"B{r}"].font = bold_font
         ws1[f"B{r}"].number_format = money_format
     
     items = [
         "Chorizo", "Lomo Liso", "Lomo vetado", "Costillar Chileno", "Costillar cerdo",
-        "Trutro", "Pechuga", "Carbón", "Pan Choripán", "Trigo Mote (1kg)", "Huesillos (1kg)", "Chancaca y Azúcar", "Restante"
+        "Trutro", "Pechuga", "Carbón", "Pan Choripán", "Trigo Mote (1kg)", "Huesillos (1kg)", "Chancaca y Azúcar", "Restante",
+        "Pino (1a Empanada)", "Pino (2a Empanada)", "Mechada", "Camarón Queso", "Queso", "Napolitana"
     ]
     
-    c1_values = [14670, 21226, 19560, 19238, 14957, 0, 0, 0, 0, 2490, 10990, 0, 19120]
-    c2_values = [4890, 0, 33693, 0, 0, 16353, 6205, 0, 0, 0, 0, 0, 0]
-    c3_values = [0, 0, 0, 0, 0, 0, 0, 8400, 0, 0, 0, 3390, 0]
-    c4_values = [0, 0, 0, 0, 0, 0, 0, 0, 5570, 0, 0, 0, 0]
+    c1_values = [14670, 21226, 19560, 19238, 14957, 0, 0, 0, 0, 2490, 10990, 0, 19120, 0, 0, 0, 0, 0, 0]
+    c2_values = [4890, 0, 33693, 0, 0, 16353, 6205, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    c3_values = [0, 0, 0, 0, 0, 0, 0, 8400, 0, 0, 0, 3390, 0, 0, 0, 0, 0, 0, 0]
+    c4_values = [0, 0, 0, 0, 0, 0, 0, 0, 5570, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    c5_values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17500, 15000, 6000, 3000, 2250, 2500]
     
     # Headers
-    header_row_idx = 6
+    header_row_idx = 7
     ws1.cell(row=header_row_idx, column=1, value="Detalle").font = header_font
     ws1.cell(row=header_row_idx, column=1).fill = header_fill
     ws1.cell(row=header_row_idx, column=1).alignment = Alignment(horizontal="center")
@@ -74,9 +78,10 @@ def update_excel(file_path):
         ("Segunda compra (Ignacio)", c2_values, "=B2"),
         ("Tercera compra (Mindy)", c3_values, "=B3"),
         ("Cuarta compra (Joaquín)", c4_values, "=B4"),
+        ("Quinta compra (Joaquín - Empanadas)", c5_values, "=B5"),
     ]
     
-    for r_offset, (label, vals, expected_ref) in enumerate(rows_data, start=7):
+    for r_offset, (label, vals, expected_ref) in enumerate(rows_data, start=8):
         ws1.cell(row=r_offset, column=1, value=label).font = bold_font
         for col_idx, val in enumerate(vals, start=2):
             c = ws1.cell(row=r_offset, column=col_idx, value=val)
@@ -92,16 +97,16 @@ def update_excel(file_path):
         tot_cell.border = thin_border
     
     # Total Columnas
-    tot_row_idx = 11
+    tot_row_idx = 13
     ws1.cell(row=tot_row_idx, column=1, value="Total").font = bold_font
     for col_idx in range(2, len(items) + 2):
         col_letter = get_column_letter(col_idx)
-        c = ws1.cell(row=tot_row_idx, column=col_idx, value=f"=SUM({col_letter}7:{col_letter}10)")
+        c = ws1.cell(row=tot_row_idx, column=col_idx, value=f"=SUM({col_letter}8:{col_letter}12)")
         c.font = bold_font
         c.number_format = money_format
         c.border = thin_border
         
-    tot_general = ws1.cell(row=tot_row_idx, column=total_col_idx, value=f"=SUM({get_column_letter(total_col_idx)}7:{get_column_letter(total_col_idx)}10)")
+    tot_general = ws1.cell(row=tot_row_idx, column=total_col_idx, value=f"=SUM({get_column_letter(total_col_idx)}8:{get_column_letter(total_col_idx)}12)")
     tot_general.font = bold_font
     tot_general.number_format = money_format
     tot_general.fill = PatternFill(start_color="FEF08A", end_color="FEF08A", fill_type="solid")
@@ -121,7 +126,8 @@ def update_excel(file_path):
     integrantes = [
         "Pamela", "Cote", "Joaquín", "Ignacio", "Kena",
         "Ale", "Mauri", "Mindy", "Monse", "Gustavo",
-        "Coni", "Miriam", "Abuelo Coni", "Mamá Mauri", "Papá Mauri"
+        "Coni", "Miriam", "Abuelo Coni", "Mamá Mauri", "Papá Mauri",
+        "Franklin"
     ]
     
     ws2["A1"] = "Integrante"
@@ -141,15 +147,33 @@ def update_excel(file_path):
     for r_idx, persona in enumerate(integrantes, start=2):
         ws2.cell(row=r_idx, column=1, value=persona).font = bold_font
         for col_idx, item in enumerate(items, start=2):
-            item_num = col_idx - 1 # 1 to 13
-            if persona == "Monse":
-                # Vegetariana: No carnes, no carbón, no pan choripán (1 a 9 = No). Sí Trigo Mote, Huesillos, Chancaca y Azúcar, Restante (10 a 13 = Sí)
-                is_si = (item_num >= 10)
-            elif persona == "Miriam":
-                # No chorizo, lomo liso, lomo vetado, no pan choripán (1, 2, 3, 9 = No). Sí costillares, pollo, carbón, mote, huesillos, chancaca, restante.
-                is_si = (item_num not in [1, 2, 3, 9])
+            item_num = col_idx - 1 # 1 to 19
+            # Items 1 to 13 son asado
+            # Items 14 a 19 son empanadas:
+            # 14: Pino (1a), 15: Pino (2a), 16: Mechada, 17: Camarón Queso, 18: Queso, 19: Napolitana
+            if item_num <= 13:
+                if persona == "Monse":
+                    is_si = (item_num >= 10)
+                elif persona == "Miriam":
+                    is_si = (item_num not in [1, 2, 3, 9])
+                else:
+                    is_si = True
             else:
-                is_si = True
+                # Empanadas
+                if item == "Pino (1a Empanada)":
+                    is_si = persona in ["Joaquín", "Ignacio", "Gustavo", "Mauri", "Pamela", "Kena", "Mindy"]
+                elif item == "Pino (2a Empanada)":
+                    is_si = persona in ["Joaquín", "Ignacio", "Gustavo", "Mauri", "Pamela", "Kena"]
+                elif item == "Mechada":
+                    is_si = persona in ["Ale", "Franklin"]
+                elif item == "Camarón Queso":
+                    is_si = persona == "Franklin"
+                elif item == "Queso":
+                    is_si = persona == "Cote"
+                elif item == "Napolitana":
+                    is_si = persona == "Cote"
+                else:
+                    is_si = False
                 
             val_text = "Sí" if is_si else "No"
             c = ws2.cell(row=r_idx, column=col_idx, value=val_text)
@@ -180,8 +204,8 @@ def update_excel(file_path):
     
     headers_ws3 = [
         "Integrante", "Consumo Propio", "Aporte Cuota Kena (1/4)", 
-        "Total Cuota a Pagar", "Aportado en Compras", "Saldo Final a Transferir", 
-        "Destinatario", "Estado Pago"
+        "Total Cuota a Pagar", "Aportado en Compras", "Saldo a Liquidar", 
+        "Destinatario / Acción", "Estado"
     ]
     
     for c_idx, h in enumerate(headers_ws3, start=1):
@@ -191,7 +215,6 @@ def update_excel(file_path):
         cell.alignment = Alignment(horizontal="center")
         
     sponsors_kena = ["Pamela", "Ale", "Mindy", "Joaquín"]
-    # Row for Kena in ws3 is row 6 (Kena is index 4 in integrantes list -> row 6)
     kena_row = integrantes.index("Kena") + 2
     
     for r_idx, persona in enumerate(integrantes, start=2):
@@ -201,7 +224,7 @@ def update_excel(file_path):
         formula_terms = []
         for col_idx in range(2, len(items) + 2):
             col_letter = get_column_letter(col_idx)
-            term = f"IF('Consumo por Integrante'!{col_letter}{r_idx}=\"Sí\", Compras!{col_letter}$11 / 'Consumo por Integrante'!{col_letter}${count_row}, 0)"
+            term = f"IF('Consumo por Integrante'!{col_letter}{r_idx}=\"Sí\", Compras!{col_letter}$13 / 'Consumo por Integrante'!{col_letter}${count_row}, 0)"
             formula_terms.append(term)
         
         exact_formula = "=" + " + ".join(formula_terms)
@@ -239,28 +262,38 @@ def update_excel(file_path):
         elif persona == "Mindy":
             aporte = 11790
         elif persona == "Joaquín":
-            aporte = 5570
+            aporte = 51820
             
         c_paid = ws3.cell(row=r_idx, column=5, value=aporte)
         c_paid.font = regular_font
         c_paid.number_format = money_format
         c_paid.border = thin_border
         
-        # Col F: Saldo Final a Transferir
+        # Col F: Saldo a Liquidar
+        # Col G: Destinatario / Acción
+        # Col H: Estado
         if persona == "Ignacio":
-            c_net = ws3.cell(row=r_idx, column=6, value=0)
-            c_dest = ws3.cell(row=r_idx, column=7, value="Organizador (Recibe)")
+            c_net = ws3.cell(row=r_idx, column=6, value=f"=E{r_idx}-B{r_idx}")
+            c_net.font = Font(name="Calibri", size=11, bold=True, color="1E3A8A")
+            c_dest = ws3.cell(row=r_idx, column=7, value="Organizador (Recauda $193.121)")
             c_status = ws3.cell(row=r_idx, column=8, value="Organizador")
         elif persona == "Kena":
             c_net = ws3.cell(row=r_idx, column=6, value=0)
+            c_net.font = Font(name="Calibri", size=11, bold=True, color="6B7280")
             c_dest = ws3.cell(row=r_idx, column=7, value="Cubierto por familiares")
             c_status = ws3.cell(row=r_idx, column=8, value="Cubierto")
+        elif persona == "Joaquín":
+            # Saldo a favor
+            c_net = ws3.cell(row=r_idx, column=6, value=f"=E{r_idx}-D{r_idx}")
+            c_net.font = Font(name="Calibri", size=11, bold=True, color="2563EB")
+            c_dest = ws3.cell(row=r_idx, column=7, value="Ignacio le transfiere (Saldo a favor)")
+            c_status = ws3.cell(row=r_idx, column=8, value="A favor (Recibe)")
         else:
             c_net = ws3.cell(row=r_idx, column=6, value=f"=IF(D{r_idx}-E{r_idx}>0, D{r_idx}-E{r_idx}, 0)")
-            c_dest = ws3.cell(row=r_idx, column=7, value="Ignacio")
+            c_net.font = Font(name="Calibri", size=11, bold=True, color="047857")
+            c_dest = ws3.cell(row=r_idx, column=7, value="Transfiere a Ignacio")
             c_status = ws3.cell(row=r_idx, column=8, value="Pendiente")
             
-        c_net.font = Font(name="Calibri", size=11, bold=True, color="047857" if persona not in ["Ignacio", "Kena"] else "6B7280")
         c_net.number_format = money_format
         c_net.border = thin_border
         
@@ -273,7 +306,7 @@ def update_excel(file_path):
         c_status.border = thin_border
         
     tot_row = len(integrantes) + 2
-    ws3.cell(row=tot_row, column=1, value="Total Recaudado").font = bold_font
+    ws3.cell(row=tot_row, column=1, value="Totales").font = bold_font
     
     t_propio = ws3.cell(row=tot_row, column=2, value=f"=SUM(B2:B{tot_row-1})")
     t_propio.font = bold_font
@@ -299,13 +332,14 @@ def update_excel(file_path):
     t_paid.fill = PatternFill(start_color="FEF08A", end_color="FEF08A", fill_type="solid")
     t_paid.border = thin_border
 
-    t_net = ws3.cell(row=tot_row, column=6, value=f"=SUM(F2:F{tot_row-1})")
+    t_net = ws3.cell(row=tot_row, column=6, value=f"=SUMIF(G2:G{tot_row-1}, \"Transfiere a Ignacio\", F2:F{tot_row-1})")
     t_net.font = bold_font
     t_net.number_format = money_format
     t_net.fill = PatternFill(start_color="DCFCE7", end_color="DCFCE7", fill_type="solid")
     t_net.border = thin_border
 
-    ws3.cell(row=tot_row, column=7, value="")
+    ws3.cell(row=tot_row, column=7, value="Total Recaudado por Ignacio")
+    ws3.cell(row=tot_row, column=7).font = bold_font
     ws3.cell(row=tot_row, column=8, value="")
 
     for col in ws3.columns:
