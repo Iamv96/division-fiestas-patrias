@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>División de Cuentas - Fiestas Patrias 🇨🇱</title>
+  <title>Fiestas patrias</title>
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js via CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -28,7 +26,7 @@
     body {
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
-    /* Custom scrollbar for matrix table */
+    /* Custom scrollbar for table */
     .table-container::-webkit-scrollbar {
       height: 10px;
       width: 10px;
@@ -57,28 +55,15 @@
             🇨🇱
           </div>
           <div>
-            <div class="flex items-center space-x-2">
-              <h1 class="text-2xl font-extrabold tracking-tight">Fiestas Patrias en Familia</h1>
-              <span class="bg-red-500/80 text-white text-xs px-2.5 py-0.5 rounded-full font-semibold border border-white/20 uppercase tracking-wider">En Vivo</span>
-            </div>
-            <p class="text-blue-100 text-xs sm:text-sm font-medium">División Inteligente de Gastos & Gestor de Cobro</p>
+            <h1 class="text-2xl font-extrabold tracking-tight">Fiestas patrias</h1>
+            <p class="text-blue-100 text-xs sm:text-sm font-medium">División de gastos de asado familiar</p>
           </div>
         </div>
         
         <div class="flex flex-wrap items-center gap-2.5">
-          <button onclick="copyGroupWhatsAppSummary()" class="inline-flex items-center px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 active:scale-95 transition-all text-white text-xs sm:text-sm font-semibold rounded-xl shadow-md gap-2 border border-emerald-400/40">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.532 1.77.814 2.796.814 3.182 0 5.768-2.586 5.768-5.766 0-3.18-2.586-5.766-5.768-5.766zm9.969 5.766c0 5.518-4.482 10-10 10-1.748 0-3.385-.45-4.819-1.238l-7.181 1.886 1.921-7.014c-.848-1.488-1.341-3.21-1.341-5.054 0-5.518 4.482-10 10-10s10 4.482 10 10z"/></svg>
-            <span>Resumen WhatsApp</span>
-          </button>
-          
           <button onclick="openBankModal()" class="inline-flex items-center px-3.5 py-2 bg-white/10 hover:bg-white/20 active:scale-95 transition-all text-white text-xs sm:text-sm font-semibold rounded-xl border border-white/25 gap-2 backdrop-blur-sm">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
             <span>Datos Bancarios</span>
-          </button>
-
-          <button onclick="resetToDefaults()" title="Restablecer valores del Excel original" class="inline-flex items-center px-3 py-2 bg-white/10 hover:bg-red-600 active:scale-95 transition-all text-white text-xs sm:text-sm font-semibold rounded-xl border border-white/25 gap-1.5 backdrop-blur-sm">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-            <span>Reiniciar</span>
           </button>
         </div>
       </div>
@@ -88,154 +73,45 @@
   <!-- MAIN CONTAINER -->
   <main class="w-full max-w-[98%] 2xl:max-w-[1760px] mx-auto px-3 sm:px-6 lg:px-8 py-6 flex-1 space-y-6">
 
-    <!-- KPI CARDS GRID (6 Cards) -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+    <!-- KPI CARDS GRID (2 Cards) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
       <!-- Total Gastado -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
-        <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Total Compras</p>
-        <p class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1" id="kpi-total-gastado">$247.002</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">5 boletas (Ignacio + Mindy + Joaquín)</p>
-      </div>
-
-      <!-- Carnes Total -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
-        <div class="flex items-center justify-between">
-          <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Carnes & Pan</p>
-          <span class="text-xs">🥩</span>
-        </div>
-        <p class="text-xl sm:text-2xl font-extrabold text-rose-700 mt-1" id="kpi-total-carnes">$164.762</p>
-        <p class="text-[11px] text-slate-500 mt-0.5" id="kpi-pct-carnes">Carnes + Carbón + Pan</p>
-      </div>
-
-      <!-- Empanadas Joaquín -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
-        <div class="flex items-center justify-between">
-          <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Empanadas</p>
-          <span class="text-xs">🥟</span>
-        </div>
-        <p class="text-xl sm:text-2xl font-extrabold text-emerald-700 mt-1" id="kpi-total-empanadas">$46.250</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">18 un. (Compró Joaquín)</p>
-      </div>
-
-      <!-- Mote & Huesillos -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
-        <div class="flex items-center justify-between">
-          <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Mote c/ Huesillo</p>
-          <span class="text-xs">🍑</span>
-        </div>
-        <p class="text-xl sm:text-2xl font-extrabold text-amber-600 mt-1" id="kpi-total-mote">$16.870</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">Mote + Huesillo + Chancaca</p>
-      </div>
-
-      <!-- Restante Común -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
-        <div class="flex items-center justify-between">
-          <p class="text-[11px] font-bold tracking-wider text-slate-500 uppercase">Restante</p>
-          <span class="text-xs">🥤</span>
-        </div>
-        <p class="text-xl sm:text-2xl font-extrabold text-blue-700 mt-1" id="kpi-total-restante">$19.120</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">Bebidas, pisco, insumos</p>
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
+        <p class="text-xs font-bold tracking-wider text-slate-500 uppercase">Total Compras</p>
+        <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1" id="kpi-total-gastado">$247.002</p>
+        <p class="text-xs text-slate-500 mt-0.5">5 boletas (Ignacio + Mindy + Joaquín)</p>
       </div>
 
       <!-- Estado Recaudación -->
-      <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-4 shadow-sm border border-emerald-200 hover:shadow-md transition-shadow">
+      <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-5 shadow-sm border border-emerald-200 hover:shadow-md transition-shadow">
         <div class="flex items-center justify-between">
-          <p class="text-[11px] font-bold tracking-wider text-emerald-800 uppercase">Recaudado</p>
-          <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800" id="badge-pagados">0/16</span>
+          <p class="text-xs font-bold tracking-wider text-emerald-800 uppercase">Recaudado</p>
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800" id="badge-pagados">0/16</span>
         </div>
-        <p class="text-xl sm:text-2xl font-extrabold text-emerald-800 mt-1" id="kpi-total-cobrado">$0</p>
-        <div class="w-full bg-emerald-200 rounded-full h-1.5 mt-2 overflow-hidden">
-          <div class="bg-emerald-600 h-1.5 rounded-full transition-all duration-500" id="progress-cobrado" style="width: 0%"></div>
+        <p class="text-2xl sm:text-3xl font-extrabold text-emerald-800 mt-1" id="kpi-total-cobrado">$0</p>
+        <div class="w-full bg-emerald-200 rounded-full h-2 mt-2.5 overflow-hidden">
+          <div class="bg-emerald-600 h-2 rounded-full transition-all duration-500" id="progress-cobrado" style="width: 0%"></div>
         </div>
       </div>
     </div>
 
     <!-- TABS NAVIGATION -->
-    <div class="bg-white rounded-2xl p-1.5 shadow-sm border border-slate-200/80 flex flex-wrap gap-1.5">
-      <button onclick="switchTab('tab-matrix')" id="btn-tab-matrix" class="tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 bg-chileBlue text-white shadow-sm">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-        <span>1. Matriz en Vivo (Activar / Desactivar)</span>
-      </button>
-
-      <button onclick="switchTab('tab-cards')" id="btn-tab-cards" class="tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+    <div class="bg-white rounded-2xl p-1.5 shadow-sm border border-slate-200/80 flex flex-wrap gap-2 max-w-md">
+      <button onclick="switchTab('tab-cards')" id="btn-tab-cards" class="tab-btn flex-1 py-2.5 px-5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 bg-chileBlue text-white shadow-sm">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-        <span>2. Cuotas y Cobranza Familiar</span>
+        <span>Cuota por persona</span>
       </button>
 
-      <button onclick="switchTab('tab-charts')" id="btn-tab-charts" class="tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-        <span>3. Análisis & Gráficos</span>
+      <button onclick="switchTab('tab-receipts')" id="btn-tab-receipts" class="tab-btn flex-1 py-2.5 px-5 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        <span>Comprobantes</span>
       </button>
     </div>
 
     <!-- ========================================================================= -->
-    <!-- TAB 1: MATRIZ INTERACTIVA EN VIVO -->
+    <!-- TAB 1: CUOTA POR PERSONA -->
     <!-- ========================================================================= -->
-    <section id="tab-matrix" class="space-y-4">
-      
-      <!-- Top banner info -->
-      <div class="bg-gradient-to-r from-blue-50 via-indigo-50 to-amber-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5">
-        <div class="space-y-1">
-          <div class="flex items-center gap-2">
-            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold">i</span>
-            <h2 class="text-base sm:text-lg font-bold text-slate-900">Control Dinámico en Tiempo Real</h2>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-600">
-            Haz clic en los interruptores para incluir o excluir a cualquier persona de cualquier producto. 
-            El costo por porción y las cuotas finales se recalculan <strong>automáticamente en vivo</strong>.
-          </p>
-        </div>
-      </div>
-
-      <!-- THE MATRIX TABLE -->
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/90 overflow-hidden">
-        <div class="overflow-x-auto table-container w-full">
-          <table class="w-full text-left border-collapse min-w-[1700px]">
-            <thead>
-              <!-- Category Header Row -->
-              <tr class="bg-slate-100/80 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
-                <th rowspan="2" class="p-3 sticky left-0 bg-slate-100 z-20 border-r border-slate-200 min-w-[190px]">
-                  Integrante (16)
-                </th>
-                <th colspan="9" class="p-2 text-center bg-rose-50/70 border-r border-slate-200 text-rose-900">
-                  🥩 Carnes, Asado & Pan ($164.762)
-                </th>
-                <th colspan="3" class="p-2 text-center bg-amber-50/70 border-r border-slate-200 text-amber-900">
-                  🍑 Mote con Huesillos ($16.870)
-                </th>
-                <th class="p-2 text-center bg-blue-50/70 border-r border-slate-200 text-blue-900">
-                  🥤 Restante ($19.120)
-                </th>
-                <th colspan="6" class="p-2 text-center bg-emerald-50/70 border-r border-slate-200 text-emerald-900">
-                  🥟 Empanadas Joaquín ($46.250)
-                </th>
-                <th rowspan="2" class="p-3 text-right bg-slate-100 z-20 border-l border-slate-200 min-w-[130px]">
-                  Cuota Total
-                </th>
-              </tr>
-
-              <!-- Items Columns Header Row -->
-              <tr class="bg-slate-50 border-b border-slate-200 text-xs text-slate-700" id="matrix-header-items">
-                <!-- Dynamically populated -->
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100 text-sm" id="matrix-body">
-              <!-- Dynamically populated rows for 16 members -->
-            </tbody>
-            <tfoot>
-              <tr class="bg-slate-100/90 font-bold border-t-2 border-slate-300 text-xs sm:text-sm text-slate-800" id="matrix-footer">
-                <!-- Dynamically populated footer totals -->
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================================================= -->
-    <!-- TAB 2: CUOTAS INDIVIDUALES & COBRANZA -->
-    <!-- ========================================================================= -->
-    <section id="tab-cards" class="space-y-4 hidden">
+    <section id="tab-cards" class="space-y-4">
       
       <!-- Filters and search bar -->
       <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -273,36 +149,161 @@
     </section>
 
     <!-- ========================================================================= -->
-    <!-- TAB 3: ANÁLISIS, GRÁFICOS Y DESGLOSE COMPRAS -->
+    <!-- TAB 2: COMPROBANTES Y DESGLOSE -->
     <!-- ========================================================================= -->
-    <section id="tab-charts" class="space-y-6 hidden">
+    <section id="tab-receipts" class="space-y-6 hidden">
       
-      <!-- Charts Row -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Distribution by Category Donut Chart -->
-        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80">
-          <h3 class="text-base font-bold text-slate-900 mb-1">Distribución del Presupuesto Total</h3>
-          <p class="text-xs text-slate-500 mb-4">Gasto por tipo de producto en las 2 compras</p>
-          <div class="relative h-64 flex items-center justify-center">
-            <canvas id="categoryChart"></canvas>
+      <!-- Top banner info -->
+      <div class="bg-gradient-to-r from-blue-50 via-indigo-50 to-slate-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🧾</span>
+          <h2 class="text-base sm:text-lg font-bold text-slate-900">Comprobantes y Desglose de Compras</h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1">
+          A continuación se presenta el detalle de cada una de las 5 compras realizadas, los productos adquiridos y sus respaldos oficiales.
+        </p>
+      </div>
+
+      <!-- Grid de Comprobantes por Compra -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- Compra 1 -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-xl text-xs font-bold bg-blue-100 text-blue-800 border border-blue-200">
+                Compra #1 • Ignacio
+              </span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">✓ Verificada</span>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 font-semibold uppercase">Monto Total</p>
+              <p class="text-2xl font-black text-slate-900 mt-0.5">$122.251</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 space-y-1.5 text-xs text-slate-600">
+              <p class="font-bold text-slate-700 mb-1">Productos adquiridos:</p>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🥩 Lomo Liso:</span><span class="font-semibold text-slate-800">$21.226</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🥩 Lomo Vetado:</span><span class="font-semibold text-slate-800">$19.560</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🍖 Costillar Chileno:</span><span class="font-semibold text-slate-800">$19.238</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🍖 Costillar Cerdo:</span><span class="font-semibold text-slate-800">$14.957</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🌭 Chorizo:</span><span class="font-semibold text-slate-800">$14.670</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🍑 Huesillos (1kg):</span><span class="font-semibold text-slate-800">$10.990</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🌾 Trigo Mote (1kg):</span><span class="font-semibold text-slate-800">$2.490</span></div>
+              <div class="flex justify-between py-0.5"><span>🥤 Restante (insumos):</span><span class="font-semibold text-slate-800">$19.120</span></div>
+            </div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-3 border border-dashed border-slate-300 text-center">
+            <span class="text-xs font-semibold text-slate-500">📄 Boleta registrada por Ignacio</span>
           </div>
         </div>
 
-        <!-- Quotas Bar Chart -->
-        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80">
-          <h3 class="text-base font-bold text-slate-900 mb-1">Comparativa de Cuotas por Integrante</h3>
-          <p class="text-xs text-slate-500 mb-4">Monto total a transferir por comensal</p>
-          <div class="relative h-64">
-            <canvas id="quotasChart"></canvas>
+        <!-- Compra 2 -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-xl text-xs font-bold bg-blue-100 text-blue-800 border border-blue-200">
+                Compra #2 • Ignacio
+              </span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">✓ Verificada</span>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 font-semibold uppercase">Monto Total</p>
+              <p class="text-2xl font-black text-slate-900 mt-0.5">$61.141</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 space-y-1.5 text-xs text-slate-600">
+              <p class="font-bold text-slate-700 mb-1">Productos adquiridos:</p>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🥩 Lomo Vetado:</span><span class="font-semibold text-slate-800">$33.693</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🍗 Trutro Pollo:</span><span class="font-semibold text-slate-800">$16.353</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🍗 Pechuga Pollo:</span><span class="font-semibold text-slate-800">$6.205</span></div>
+              <div class="flex justify-between py-0.5"><span>🌭 Chorizo:</span><span class="font-semibold text-slate-800">$4.890</span></div>
+            </div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-3 border border-dashed border-slate-300 text-center">
+            <span class="text-xs font-semibold text-slate-500">📄 Boleta registrada por Ignacio</span>
           </div>
         </div>
+
+        <!-- Compra 3 -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-xl text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                Compra #3 • Mindy
+              </span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">✓ Verificada</span>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 font-semibold uppercase">Monto Total</p>
+              <p class="text-2xl font-black text-slate-900 mt-0.5">$11.790</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 space-y-1.5 text-xs text-slate-600">
+              <p class="font-bold text-slate-700 mb-1">Productos adquiridos:</p>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🪵 Carbón para asado:</span><span class="font-semibold text-slate-800">$8.400</span></div>
+              <div class="flex justify-between py-0.5"><span>🍯 Chancaca y Azúcar:</span><span class="font-semibold text-slate-800">$3.390</span></div>
+            </div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-3 border border-dashed border-slate-300 text-center">
+            <span class="text-xs font-semibold text-slate-500">📄 Boleta registrada por Mindy</span>
+          </div>
+        </div>
+
+        <!-- Compra 4 -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-xl text-xs font-bold bg-indigo-100 text-indigo-900 border border-indigo-300">
+                Compra #4 • Joaquín
+              </span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">✓ Verificada</span>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 font-semibold uppercase">Monto Total</p>
+              <p class="text-2xl font-black text-slate-900 mt-0.5">$5.570</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 space-y-1.5 text-xs text-slate-600">
+              <p class="font-bold text-slate-700 mb-1">Productos adquiridos:</p>
+              <div class="flex justify-between py-0.5"><span>🥖 Pan para Choripán:</span><span class="font-semibold text-slate-800">$5.570</span></div>
+            </div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-3 border border-dashed border-slate-300 text-center">
+            <span class="text-xs font-semibold text-slate-500">📄 Boleta registrada por Joaquín</span>
+          </div>
+        </div>
+
+        <!-- Compra 5 -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-900 border border-emerald-300">
+                Compra #5 (Empanadas) • Joaquín
+              </span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">✓ Verificada</span>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 font-semibold uppercase">Monto Total (18 empanadas)</p>
+              <p class="text-2xl font-black text-slate-900 mt-0.5">$46.250</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 space-y-1.5 text-xs text-slate-600">
+              <p class="font-bold text-slate-700 mb-1">Variedades:</p>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🥟 13 Empanadas de Pino ($2.500 c/u):</span><span class="font-semibold text-slate-800">$32.500</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🥟 2 Mechada Queso ($3.000 c/u):</span><span class="font-semibold text-slate-800">$6.000</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🥟 1 Camarón Queso ($3.000):</span><span class="font-semibold text-slate-800">$3.000</span></div>
+              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🥟 1 Napolitana ($2.500):</span><span class="font-semibold text-slate-800">$2.500</span></div>
+              <div class="flex justify-between py-0.5"><span>🥟 1 Queso ($2.250):</span><span class="font-semibold text-slate-800">$2.250</span></div>
+            </div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-3 border border-dashed border-slate-300 text-center">
+            <span class="text-xs font-semibold text-slate-500">📄 Comprobante empanadas por Joaquín</span>
+          </div>
+        </div>
+
       </div>
 
       <!-- Purchases summary table -->
       <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 space-y-4">
         <div>
-          <h3 class="text-base font-bold text-slate-900">Detalle de Compras Ingresadas</h3>
-          <p class="text-xs text-slate-500">Monto asignado por boleta para cada ítem (Ignacio + Mindy + Joaquín)</p>
+          <h3 class="text-base font-bold text-slate-900">Tabla General de Compras & Costo por Comensal</h3>
+          <p class="text-xs text-slate-500">Detalle consolidado de los 19 ítems distribuidos entre las 5 compras ingresadas</p>
         </div>
 
         <div class="overflow-x-auto">
@@ -347,7 +348,7 @@
   <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-xs text-center mt-auto">
     <div class="w-full max-w-[98%] 2xl:max-w-[1760px] mx-auto px-4 space-y-2">
       <p class="font-medium text-slate-300">🇨🇱 Creado para celebrar las Fiestas Patrias en familia de forma justa y transparente.</p>
-      <p>Los cambios en la matriz se guardan localmente en tu navegador. Puedes reiniciar a los valores del Excel cuando quieras.</p>
+      <p>Desglose con cálculo exacto por producto y compensación directa de compras.</p>
     </div>
   </footer>
 
@@ -554,10 +555,8 @@
       document.getElementById('bank-account').value = bankData.account || '';
       document.getElementById('bank-email').value = bankData.email || '';
 
-      // Render Matrix Header & Table
-      renderMatrixHeader();
+      // Render cards & purchases
       recalculateAndRenderAll();
-      initCharts();
     }
 
     function saveState() {
@@ -699,38 +698,11 @@
     const clp = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
     const clpExact = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-    function renderMatrixHeader() {
-      const headerRow = document.getElementById('matrix-header-items');
-      headerRow.innerHTML = '';
-
-      ITEMS_DEF.forEach(item => {
-        const th = document.createElement('th');
-        th.className = 'py-3 px-1 text-center border-r border-slate-200 min-w-[76px]';
-        th.innerHTML = `
-          <div class="flex flex-col items-center space-y-1">
-            <span class="text-base">${item.icon}</span>
-            <span class="font-bold text-slate-800 text-[10px] leading-tight text-center">${item.name}</span>
-            <span class="text-[9px] text-slate-500 font-semibold">${clp.format(item.total)}</span>
-            <div class="text-[9px] font-bold text-blue-700 bg-blue-50 px-1 py-0.5 rounded-full" id="col-count-${item.id}">
-              0 p. / $0
-            </div>
-            <div class="flex items-center gap-1 mt-1 pt-1 border-t border-slate-200 w-full justify-center">
-              <button onclick="toggleColumn('${item.id}', true)" title="Activar a todos en verde" class="text-[8px] px-1 py-0.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold transition-all shadow-xs">Todos</button>
-              <button onclick="toggleColumn('${item.id}', false)" title="Desactivar a todos en rojo" class="text-[8px] px-1 py-0.5 bg-rose-600 hover:bg-rose-500 text-white rounded font-bold transition-all shadow-xs">Nadie</button>
-            </div>
-          </div>
-        `;
-        headerRow.appendChild(th);
-      });
-    }
-
     function recalculateAndRenderAll() {
       const calc = calculate();
-      renderMatrixBody(calc);
       renderKPIs(calc);
       renderCards(calc);
       renderPurchasesTable(calc);
-      updateCharts(calc);
     }
 
     function renderKPIs(calc) {
@@ -744,131 +716,6 @@
       document.getElementById('count-filter-all').textContent = MEMBERS_DEF.length;
       document.getElementById('count-filter-pending').textContent = MEMBERS_DEF.length - calc.paidCount;
       document.getElementById('count-filter-paid').textContent = calc.paidCount;
-
-      // Update Column sub-headers in matrix
-      ITEMS_DEF.forEach(item => {
-        const count = calc.itemCounts[item.id];
-        const cost = calc.itemPerPerson[item.id];
-        const badge = document.getElementById(`col-count-${item.id}`);
-        if (badge) {
-          badge.textContent = `${count}p. | ${clp.format(cost)}`;
-          badge.className = count === 0 
-            ? 'text-[9px] font-bold text-rose-700 bg-rose-50 px-1 py-0.5 rounded-full' 
-            : 'text-[9px] font-bold text-blue-700 bg-blue-50 px-1 py-0.5 rounded-full';
-        }
-      });
-    }
-
-    function renderMatrixBody(calc) {
-      const tbody = document.getElementById('matrix-body');
-      tbody.innerHTML = '';
-
-      MEMBERS_DEF.forEach((m, idx) => {
-        const tr = document.createElement('tr');
-        tr.className = idx % 2 === 0 ? 'bg-white hover:bg-blue-50/40 transition-colors' : 'bg-slate-50/50 hover:bg-blue-50/40 transition-colors';
-
-        // Check active preset for member
-        const meats = ITEMS_DEF.filter(it => it.category === 'carne').map(it => it.id);
-        const nonMeats = ITEMS_DEF.filter(it => it.category !== 'carne').map(it => it.id);
-        const eatsAll = ITEMS_DEF.every(it => matrixState[m][it.id] === true);
-        const eatsVeg = meats.every(id => matrixState[m][id] === false) && nonMeats.some(id => matrixState[m][id] === true);
-        const eatsNone = ITEMS_DEF.every(it => matrixState[m][it.id] === false);
-
-        const btnTClass = eatsAll
-          ? 'text-[10px] px-2 py-0.5 bg-emerald-600 text-white border-2 border-emerald-800 rounded-md font-black shadow-md ring-2 ring-emerald-300 transform scale-105 transition-all'
-          : 'text-[9px] px-1.5 py-0.5 bg-slate-100 hover:bg-emerald-100 text-slate-400 hover:text-emerald-800 border border-slate-200 rounded-md font-semibold transition-all';
-
-        const btnVClass = eatsVeg
-          ? 'text-[10px] px-2 py-0.5 bg-amber-500 text-white border-2 border-amber-800 rounded-md font-black shadow-md ring-2 ring-amber-300 transform scale-105 transition-all'
-          : 'text-[9px] px-1.5 py-0.5 bg-slate-100 hover:bg-amber-100 text-slate-400 hover:text-amber-800 border border-slate-200 rounded-md font-semibold transition-all';
-
-        const btnNoneClass = eatsNone
-          ? 'text-[10px] px-2 py-0.5 bg-rose-600 text-white border-2 border-rose-800 rounded-md font-black shadow-md ring-2 ring-rose-300 transform scale-105 transition-all'
-          : 'text-[9px] px-1.5 py-0.5 bg-slate-100 hover:bg-rose-100 text-slate-400 hover:text-rose-800 border border-slate-200 rounded-md font-semibold transition-all';
-
-        // Member Column (Sticky left)
-        let html = `
-          <td class="p-3 sticky left-0 z-10 font-bold text-slate-900 border-r border-slate-200 ${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'} shadow-sm">
-            <div class="flex items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-extrabold">
-                  ${m.charAt(0)}
-                </span>
-                <span class="truncate">${m}</span>
-              </div>
-              <div class="flex items-center gap-1">
-                <button onclick="setMemberPreset('${m}', 'all')" title="${eatsAll ? 'Seleccionado: Come todo' : 'Marcar todo para ' + m}" class="${btnTClass}">T</button>
-                <button onclick="setMemberPreset('${m}', 'veg')" title="${eatsVeg ? 'Seleccionado: Vegetariano' : 'Marcar vegetariano para ' + m}" class="${btnVClass}">V</button>
-                <button onclick="setMemberPreset('${m}', 'none')" title="${eatsNone ? 'Seleccionado: Desactivado' : 'Desactivar todo para ' + m}" class="${btnNoneClass}">✕</button>
-              </div>
-            </div>
-          </td>
-        `;
-
-        // Item cells with vibrant Green (Active) and Red (Inactive) toggle buttons
-        ITEMS_DEF.forEach(item => {
-          const isChecked = matrixState[m][item.id];
-          html += `
-            <td class="p-2 text-center border-r border-slate-200/80">
-              <button type="button" 
-                      onclick="toggleMemberItem('${m}', '${item.id}', ${!isChecked})"
-                      title="${isChecked ? 'Activado: Consume ' + item.name + ' (Clic para desactivar)' : 'Desactivado: No consume ' + item.name + ' (Clic para activar)'}"
-                      class="relative inline-flex items-center justify-center cursor-pointer select-none transition-transform active:scale-95 focus:outline-none group">
-                <div class="w-8 h-4.5 rounded-full transition-all duration-200 flex items-center p-0.5 shadow-sm ${
-                  isChecked 
-                    ? 'bg-emerald-600 hover:bg-emerald-500 ring-2 ring-emerald-300/40' 
-                    : 'bg-rose-600 hover:bg-rose-500 ring-2 ring-rose-300/40'
-                }">
-                  <div class="w-3.5 h-3.5 bg-white rounded-full shadow-md transform transition-all duration-200 ${
-                    isChecked ? 'translate-x-3.5' : 'translate-x-0'
-                  } flex items-center justify-center text-[8px] font-black ${
-                    isChecked ? 'text-emerald-700' : 'text-rose-700'
-                  }">
-                    ${isChecked ? '✓' : '✕'}
-                  </div>
-                </div>
-              </button>
-            </td>
-          `;
-        });
-
-        // Member Total Quota (Sticky right)
-        const q = calc.memberQuotas[m];
-        html += `
-          <td class="p-3 text-right font-extrabold text-slate-900 border-l border-slate-200 bg-inherit">
-            <div class="text-sm text-emerald-800">${clp.format(q.rounded)}</div>
-            <div class="text-[10px] text-slate-500 font-normal">${clpExact.format(q.exact)}</div>
-          </td>
-        `;
-
-        tr.innerHTML = html;
-        tbody.appendChild(tr);
-      });
-
-      // Render Footer Row
-      const footer = document.getElementById('matrix-footer');
-      let fHtml = `
-        <td class="p-4 sticky left-0 bg-slate-100 border-r border-slate-200 z-10">
-          TOTALES / CUADRATURA
-        </td>
-      `;
-      ITEMS_DEF.forEach(item => {
-        fHtml += `
-          <td class="p-3 text-center border-r border-slate-200">
-            <div class="text-xs font-bold text-slate-900">${clp.format(item.total)}</div>
-            <div class="text-[10px] text-slate-500">${calc.itemCounts[item.id]} pers.</div>
-          </td>
-        `;
-      });
-      fHtml += `
-        <td class="p-4 text-right bg-slate-100 border-l border-slate-200">
-          <div class="text-base text-emerald-700 font-extrabold">${clp.format(Math.round(calc.grandTotalAssigned))}</div>
-          <div class="text-[10px] ${Math.abs(calc.grandTotalAssigned - 247002) < 5 ? 'text-emerald-700 font-bold' : 'text-rose-600 font-bold'}">
-            ${Math.abs(calc.grandTotalAssigned - 247002) < 5 ? '✓ 100% Cuadrado' : 'Ajustar comensales'}
-          </div>
-        </td>
-      `;
-      footer.innerHTML = fHtml;
     }
 
     function renderCards(calc) {
@@ -1219,21 +1066,19 @@
     }
 
     function switchTab(tabId) {
-      ['tab-matrix', 'tab-cards', 'tab-charts'].forEach(t => {
-        document.getElementById(t).classList.add('hidden');
+      ['tab-cards', 'tab-receipts'].forEach(t => {
+        const el = document.getElementById(t);
+        if (el) el.classList.add('hidden');
       });
-      document.getElementById(tabId).classList.remove('hidden');
+      const activeEl = document.getElementById(tabId);
+      if (activeEl) activeEl.classList.remove('hidden');
 
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.className = 'tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+        btn.className = 'tab-btn flex-1 py-2.5 px-5 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100';
       });
       const activeBtn = document.getElementById(`btn-${tabId}`);
       if (activeBtn) {
-        activeBtn.className = 'tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 bg-chileBlue text-white shadow-sm';
-      }
-
-      if (tabId === 'tab-charts') {
-        setTimeout(() => updateCharts(calculate()), 50);
+        activeBtn.className = 'tab-btn flex-1 py-2.5 px-5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 bg-chileBlue text-white shadow-sm';
       }
     }
 
@@ -1396,96 +1241,6 @@
       }, 3000);
     }
 
-    // -------------------------------------------------------------
-    // CHARTS (Chart.js)
-    // -------------------------------------------------------------
-    let categoryChartInstance = null;
-    let quotasChartInstance = null;
-
-    function initCharts() {
-      const catCtx = document.getElementById('categoryChart')?.getContext('2d');
-      if (catCtx) {
-        categoryChartInstance = new Chart(catCtx, {
-          type: 'doughnut',
-          data: {
-            labels: ['Carnes, Asado & Pan', 'Empanadas (Joaquín)', 'Mote c/ Huesillo', 'Restante'],
-            datasets: [{
-              data: [164762, 46250, 16870, 19120],
-              backgroundColor: ['#D62828', '#10B981', '#F59E0B', '#3B82F6'],
-              borderWidth: 2,
-              borderColor: '#ffffff'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
-              tooltip: {
-                callbacks: {
-                  label: function(context) {
-                    const label = context.label || '';
-                    const val = context.raw || 0;
-                    return `${label}: ${clp.format(val)}`;
-                  }
-                }
-              }
-            }
-          }
-        });
-      }
-
-      const qCtx = document.getElementById('quotasChart')?.getContext('2d');
-      if (qCtx) {
-        quotasChartInstance = new Chart(qCtx, {
-          type: 'bar',
-          data: {
-            labels: MEMBERS_DEF,
-            datasets: [{
-              label: 'Consumo Personal CLP',
-              data: [],
-              backgroundColor: '#1D4ED8',
-              borderRadius: 6
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              y: {
-                beginAtZero: true,
-                ticks: {
-                  callback: val => '$' + val.toLocaleString('es-CL')
-                }
-              },
-              x: {
-                ticks: {
-                  font: { size: 10 }
-                }
-              }
-            },
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: function(context) {
-                    return `Consumo: ${clp.format(context.raw)}`;
-                  }
-                }
-              }
-            }
-          }
-        });
-      }
-    }
-
-    function updateCharts(calc) {
-      if (quotasChartInstance) {
-        const amounts = MEMBERS_DEF.map(m => calc.memberQuotas[m].rounded);
-        quotasChartInstance.data.datasets[0].data = amounts;
-        quotasChartInstance.update();
-      }
-    }
 
     // Launch on load
     window.addEventListener('DOMContentLoaded', init);
