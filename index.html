@@ -96,15 +96,15 @@
     </div>
 
     <!-- TABS NAVIGATION -->
-    <div class="bg-white rounded-2xl p-1.5 shadow-sm border border-slate-200/80 flex flex-wrap gap-2 max-w-md">
-      <button onclick="switchTab('tab-cards')" id="btn-tab-cards" class="tab-btn flex-1 py-2.5 px-5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 bg-chileBlue text-white shadow-sm">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-        <span>Cuota por persona</span>
+    <div class="bg-white rounded-2xl p-1.5 shadow-sm border border-slate-200/80 inline-flex flex-wrap sm:flex-nowrap gap-2 w-full sm:w-auto max-w-lg">
+      <button onclick="switchTab('tab-cards')" id="btn-tab-cards" class="tab-btn flex-1 py-2.5 px-4 sm:px-5 rounded-xl font-bold text-sm whitespace-nowrap transition-all flex items-center justify-center gap-2 bg-chileBlue text-white shadow-sm">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+        <span class="whitespace-nowrap">Cuota por persona</span>
       </button>
 
-      <button onclick="switchTab('tab-receipts')" id="btn-tab-receipts" class="tab-btn flex-1 py-2.5 px-5 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-        <span>Comprobantes</span>
+      <button onclick="switchTab('tab-receipts')" id="btn-tab-receipts" class="tab-btn flex-1 py-2.5 px-4 sm:px-5 rounded-xl font-semibold text-sm whitespace-nowrap transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        <span class="whitespace-nowrap">Comprobantes</span>
       </button>
     </div>
 
@@ -114,31 +114,26 @@
     <section id="tab-cards" class="space-y-4">
       
       <!-- Filters and search bar -->
-      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Filtrar:</span>
-          <button onclick="setCardFilter('all')" id="filter-all" class="card-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-chileBlue text-white shadow-sm">
-            Todos (<span id="count-filter-all">16</span>)
-          </button>
-          <button onclick="setCardFilter('pending')" id="filter-pending" class="card-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            Pendientes (<span id="count-filter-pending">16</span>)
-          </button>
-          <button onclick="setCardFilter('paid')" id="filter-paid" class="card-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">
-            Pagados (<span id="count-filter-paid">0</span>)
-          </button>
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+        <!-- Dropdown Filter -->
+        <div class="flex items-center gap-2.5">
+          <label for="card-filter-select" class="text-xs font-bold text-slate-500 uppercase tracking-wider whitespace-nowrap">Filtrar:</label>
+          <div class="relative min-w-[180px]">
+            <select id="card-filter-select" onchange="setCardFilter(this.value)" class="w-full appearance-none bg-slate-50 hover:bg-slate-100 text-slate-800 text-xs sm:text-sm font-semibold rounded-xl pl-3.5 pr-8 py-2 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white cursor-pointer transition-all shadow-xs">
+              <option value="all">Todos (16)</option>
+              <option value="pending">Pendientes (16)</option>
+              <option value="paid">Pagados (0)</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-500">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+          </div>
         </div>
 
-        <div class="flex items-center gap-2">
-          <div class="relative w-full sm:w-64">
-            <input type="text" id="search-input" oninput="renderCards()" placeholder="Buscar integrante..." class="w-full pl-9 pr-3 py-1.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
-            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          </div>
-          <button onclick="markAllPaid(true)" title="Marcar todos como pagados" class="px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100 rounded-xl text-xs font-semibold whitespace-nowrap transition-all">
-            ✓ Todos Pagaron
-          </button>
-          <button onclick="markAllPaid(false)" title="Desmarcar todos" class="px-3 py-1.5 bg-slate-100 text-slate-600 border border-slate-300 hover:bg-slate-200 rounded-xl text-xs font-semibold whitespace-nowrap transition-all">
-            ↺ Desmarcar
-          </button>
+        <!-- Search Input -->
+        <div class="relative w-full sm:w-72">
+          <input type="text" id="search-input" oninput="renderCards()" placeholder="Buscar integrante..." class="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all shadow-xs">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </div>
       </div>
 
@@ -545,8 +540,10 @@
         try { paidStatus = JSON.parse(savedPaid); } catch (e) { paidStatus = {}; }
       }
       MEMBERS_DEF.forEach(m => {
-        if (typeof paidStatus[m] !== 'boolean') paidStatus[m] = (m === 'Ignacio' || m === 'Kena');
+        if (typeof paidStatus[m] !== 'boolean') paidStatus[m] = (m === 'Ignacio');
       });
+      // Kena pasa a verde/pagado únicamente cuando todos sus aportantes hayan pagado
+      paidStatus['Kena'] = SPONSORS_KENA.every(s => paidStatus[s]);
 
       // Load bank details
       const savedBank = localStorage.getItem('fp_bank_data_v7') || localStorage.getItem('fp_bank_data_v6') || localStorage.getItem('fp_bank_data_v5');
@@ -629,6 +626,9 @@
       // 3. Kena's quota absorption by sponsors (Pamela, Ale, Mindy, Joaquín)
       const kenaBase = baseQuotas['Kena'] || 0;
       const kenaSplit = kenaBase / SPONSORS_KENA.length;
+
+      // Kena pasa a pagado/cubierto únicamente cuando todos sus 4 aportantes han pagado
+      paidStatus['Kena'] = SPONSORS_KENA.every(s => paidStatus[s]);
 
       const memberQuotas = {};
       let totalPaidAmount = 0;
@@ -719,9 +719,13 @@
       const pct = totalToCollect > 0 ? Math.min(100, (calc.totalPaidAmount / totalToCollect) * 100) : 0;
       document.getElementById('progress-cobrado').style.width = `${pct}%`;
 
-      document.getElementById('count-filter-all').textContent = MEMBERS_DEF.length;
-      document.getElementById('count-filter-pending').textContent = MEMBERS_DEF.length - calc.paidCount;
-      document.getElementById('count-filter-paid').textContent = calc.paidCount;
+      // Actualizar opciones en la lista desplegable de filtros
+      const optAll = document.querySelector('#card-filter-select option[value="all"]');
+      const optPending = document.querySelector('#card-filter-select option[value="pending"]');
+      const optPaid = document.querySelector('#card-filter-select option[value="paid"]');
+      if (optAll) optAll.textContent = `Todos (${MEMBERS_DEF.length})`;
+      if (optPending) optPending.textContent = `Pendientes (${MEMBERS_DEF.length - calc.paidCount})`;
+      if (optPaid) optPaid.textContent = `Pagados (${calc.paidCount})`;
     }
 
     function renderCards(calc) {
@@ -763,9 +767,16 @@
         }
 
         // Minimized display amount text
+        const kenaSponsorsPaidCount = SPONSORS_KENA.filter(s => paidStatus[s]).length;
+        const allKenaSponsorsPaid = (kenaSponsorsPaidCount === SPONSORS_KENA.length);
+
         let minAmountHtml = '';
         if (isKena) {
-          minAmountHtml = `<span class="text-xs text-slate-500 font-medium">Monto a transferir a Ignacio: <strong class="text-slate-900 font-black text-sm sm:text-base">$0</strong></span>`;
+          if (allKenaSponsorsPaid) {
+            minAmountHtml = `<span class="text-xs text-slate-500 font-medium">Monto a transferir a Ignacio: <strong class="text-emerald-700 font-black text-sm sm:text-base">$0 (✓ Cubierto)</strong></span>`;
+          } else {
+            minAmountHtml = `<span class="text-xs text-slate-500 font-medium">Monto a transferir a Ignacio: <strong class="text-slate-900 font-black text-sm sm:text-base">$0</strong> <span class="text-rose-600 text-xs font-semibold">(Por cubrir ${kenaSponsorsPaidCount}/4)</span></span>`;
+          }
         } else if (isJoaquin) {
           minAmountHtml = `<span class="text-xs text-blue-800 font-medium">Saldo a favor (te transfieren): <strong class="text-blue-700 font-black text-sm sm:text-base">+${clp.format(q.netSurplus)}</strong></span>`;
         } else if (isIgnacio) {
@@ -908,10 +919,37 @@
           `;
         }
 
+        let cardBgClass = '';
+        let statusBtnClass = '';
+        let statusBtnText = '';
+        let statusBtnAction = '';
+
+        if (isKena) {
+          if (allKenaSponsorsPaid) {
+            cardBgClass = 'bg-emerald-50/40 border-emerald-300 ring-1 ring-emerald-200 hover:bg-emerald-50/70';
+            statusBtnClass = 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-600 shadow-sm';
+            statusBtnText = '✓ Cubierto';
+            statusBtnAction = `event.stopPropagation(); showToast('✓ Cuota de Kena 100% cubierta por Pamela, Ale, Mindy y Joaquín.')`;
+          } else {
+            cardBgClass = 'bg-white border-slate-200 hover:shadow-md hover:border-slate-300';
+            statusBtnClass = 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-300';
+            statusBtnText = `⏳ Por cubrir (${kenaSponsorsPaidCount}/4)`;
+            statusBtnAction = `event.stopPropagation(); showToast('La cuota de Kena pasará a verde cuando Pamela, Ale, Mindy y Joaquín paguen (${kenaSponsorsPaidCount}/4 listos).')`;
+          }
+        } else if (isJoaquin) {
+          cardBgClass = isPaid ? 'bg-emerald-50/40 border-emerald-300 ring-1 ring-emerald-200 hover:bg-emerald-50/70' : 'bg-white border-slate-200 hover:shadow-md hover:border-slate-300';
+          statusBtnClass = isPaid ? 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-600 shadow-sm' : 'bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-300';
+          statusBtnText = isPaid ? '✓ Liquidado' : '💰 Saldo a Favor';
+          statusBtnAction = `event.stopPropagation(); togglePaidStatus('${m}', ${!isPaid})`;
+        } else {
+          cardBgClass = isPaid ? 'bg-emerald-50/40 border-emerald-300 ring-1 ring-emerald-200 hover:bg-emerald-50/70' : 'bg-white border-slate-200 hover:shadow-md hover:border-slate-300';
+          statusBtnClass = isPaid ? 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-600 shadow-sm' : 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-300';
+          statusBtnText = isPaid ? '✓ Pagado' : '⏳ Pendiente';
+          statusBtnAction = `event.stopPropagation(); togglePaidStatus('${m}', ${!isPaid})`;
+        }
+
         const card = document.createElement('div');
-        card.className = `rounded-2xl p-4 sm:p-5 shadow-sm border transition-all duration-200 cursor-pointer select-none ${
-          isPaid ? 'bg-emerald-50/40 border-emerald-300 ring-1 ring-emerald-200 hover:bg-emerald-50/70' : 'bg-white border-slate-200 hover:shadow-md hover:border-slate-300'
-        }`;
+        card.className = `rounded-2xl p-4 sm:p-5 shadow-sm border transition-all duration-200 cursor-pointer select-none ${cardBgClass}`;
         card.onclick = () => toggleCardExpand(m);
 
         card.innerHTML = `
@@ -930,13 +968,9 @@
             <!-- Status Button & Expand Chevron -->
             <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <button type="button" 
-                      onclick="event.stopPropagation(); togglePaidStatus('${m}', ${!isPaid})" 
-                      class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all active:scale-95 ${
-                        isPaid 
-                          ? 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-600 shadow-sm' 
-                          : 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-300'
-                      }">
-                <span>${isKena ? '✓ Cubierto' : isJoaquin ? (isPaid ? '✓ Liquidado' : '💰 Saldo a Favor') : isPaid ? '✓ Pagado' : '⏳ Pendiente'}</span>
+                      onclick="${statusBtnAction}" 
+                      class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all active:scale-95 ${statusBtnClass}">
+                <span>${statusBtnText}</span>
               </button>
 
               <div id="card-chevron-${m}" class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 transition-transform duration-200 ${isExpanded ? 'rotate-180 bg-blue-50 text-blue-700' : ''}">
@@ -1066,26 +1100,23 @@
     }
 
     function togglePaidStatus(member, status) {
+      if (member === 'Kena') {
+        const kenaSponsorsPaidCount = SPONSORS_KENA.filter(s => paidStatus[s]).length;
+        showToast(`La cuota de Kena pasa a verde automáticamente cuando Pamela, Ale, Mindy y Joaquín paguen (${kenaSponsorsPaidCount}/4 listos).`);
+        return;
+      }
       paidStatus[member] = status;
+      // Actualizar a Kena según los aportantes
+      paidStatus['Kena'] = SPONSORS_KENA.every(s => paidStatus[s]);
       saveState();
       recalculateAndRenderAll();
-    }
-
-    function markAllPaid(status) {
-      MEMBERS_DEF.forEach(m => paidStatus[m] = status);
-      saveState();
-      recalculateAndRenderAll();
-      showToast(status ? '✓ Todos marcados como pagados' : '↺ Se desmarcaron todos los pagos');
     }
 
     function setCardFilter(filter) {
       activeCardFilter = filter;
-      document.querySelectorAll('.card-filter-btn').forEach(btn => {
-        btn.className = 'card-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200';
-      });
-      const activeBtn = document.getElementById(`filter-${filter}`);
-      if (activeBtn) {
-        activeBtn.className = 'card-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-chileBlue text-white shadow-sm';
+      const selectEl = document.getElementById('card-filter-select');
+      if (selectEl && selectEl.value !== filter) {
+        selectEl.value = filter;
       }
       renderCards();
     }
@@ -1099,11 +1130,11 @@
       if (activeEl) activeEl.classList.remove('hidden');
 
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.className = 'tab-btn flex-1 py-2.5 px-5 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+        btn.className = 'tab-btn flex-1 py-2.5 px-4 sm:px-5 rounded-xl font-semibold text-sm whitespace-nowrap transition-all flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100';
       });
       const activeBtn = document.getElementById(`btn-${tabId}`);
       if (activeBtn) {
-        activeBtn.className = 'tab-btn flex-1 py-2.5 px-5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 bg-chileBlue text-white shadow-sm';
+        activeBtn.className = 'tab-btn flex-1 py-2.5 px-4 sm:px-5 rounded-xl font-bold text-sm whitespace-nowrap transition-all flex items-center justify-center gap-2 bg-chileBlue text-white shadow-sm';
       }
     }
 
