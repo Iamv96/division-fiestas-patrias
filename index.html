@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🇨🇱 Cuota Fiestas Patrias</title>
 
+  <!-- Control de Caché: Obliga al navegador a pedir siempre la versión más reciente -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <!-- Open Graph / WhatsApp / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://iamv96.github.io/division-fiestas-patrias/">
@@ -660,34 +665,10 @@
     // INITIALIZATION & LOCALSTORAGE
     // -------------------------------------------------------------
     function init() {
-      // Load matrix from localStorage or default (v10 garantiza defaults con exclusión de mote/chancaca para Myriam y Abuelo Coni)
-      const savedMatrix = localStorage.getItem('fp_matrix_state_v10');
-      if (savedMatrix) {
-        try {
-          matrixState = JSON.parse(savedMatrix);
-          const defState = getDefaultState();
-          // Migration from Miriam to Myriam if needed
-          if (matrixState['Miriam'] && !matrixState['Myriam']) {
-            matrixState['Myriam'] = matrixState['Miriam'];
-            delete matrixState['Miriam'];
-          }
-          // Ensure all members and items exist without overwriting specific defaults
-          MEMBERS_DEF.forEach(m => {
-            if (!matrixState[m]) matrixState[m] = {};
-            ITEMS_DEF.forEach(item => {
-              if (typeof matrixState[m][item.id] !== 'boolean') {
-                matrixState[m][item.id] = defState[m][item.id];
-              }
-            });
-          });
-        } catch (e) {
-          matrixState = getDefaultState();
-        }
-      } else {
-        matrixState = getDefaultState();
-      }
+      // 1. Cargar siempre la matriz de consumo oficial desde el código (evita datos obsoletos en localStorage)
+      matrixState = getDefaultState();
 
-      // Load paid status
+      // 2. Cargar estado de pagos guardados
       const savedPaid = localStorage.getItem('fp_paid_status_v10') || localStorage.getItem('fp_paid_status_v9') || localStorage.getItem('fp_paid_status_v8') || localStorage.getItem('fp_paid_status_v7');
       if (savedPaid) {
         try {
@@ -704,7 +685,7 @@
       // Quena pasa a verde/pagado únicamente cuando todos sus aportantes hayan pagado
       paidStatus['Quena'] = SPONSORS_QUENA.every(s => paidStatus[s]);
 
-      // Load bank details if stored, otherwise default to Ignacio's official details
+      // 3. Cargar datos bancarios si fueron editados localmente
       const savedBank = localStorage.getItem('fp_bank_data_v7') || localStorage.getItem('fp_bank_data_v6') || localStorage.getItem('fp_bank_data_v5');
       if (savedBank) {
         try {
@@ -718,18 +699,18 @@
     }
 
     function saveState() {
-      localStorage.setItem('fp_matrix_state_v10', JSON.stringify(matrixState));
       localStorage.setItem('fp_paid_status_v10', JSON.stringify(paidStatus));
     }
 
     function resetToDefaults() {
-      if (confirm('¿Deseas restablecer las preferencias originales con las compras registradas?')) {
+      if (confirm('¿Deseas restablecer el registro de pagos a su estado inicial?')) {
         matrixState = getDefaultState();
         paidStatus = {};
-        MEMBERS_DEF.forEach(m => paidStatus[m] = (m === 'Ignacio' || m === 'Quena'));
+        MEMBERS_DEF.forEach(m => paidStatus[m] = (m === 'Ignacio'));
+        paidStatus['Quena'] = SPONSORS_QUENA.every(s => paidStatus[s]);
         saveState();
         recalculateAndRenderAll();
-        showToast('✓ Valores restablecidos a los originales');
+        showToast('✓ Estado de pagos restablecido');
       }
     }
 
