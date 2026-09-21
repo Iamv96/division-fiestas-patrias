@@ -155,7 +155,9 @@ def update_excel(file_path):
                 if persona == "Monse":
                     is_si = (item_num >= 10)
                 elif persona == "Myriam":
-                    is_si = (item_num not in [1, 2, 3, 9])
+                    is_si = (item_num not in [1, 2, 3, 9, 10, 11, 12])
+                elif persona == "Abuelo Coni":
+                    is_si = (item_num not in [10, 11, 12])
                 else:
                     is_si = True
             else:

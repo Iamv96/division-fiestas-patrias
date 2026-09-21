@@ -602,7 +602,8 @@
 
     // Default consumption rules:
     // Monse: Vegetariana (no carnes, no carbón, no pan choripán, no empanadas), sí mote, huesillos, chancaca/azúcar, restante
-    // Myriam: No vacuno/chorizo/pan choripán, sí costillares, pollo, carbón, mote, huesillos, chancaca/azúcar, restante
+    // Myriam: No vacuno/chorizo/pan choripán, no mote/huesillos/chancaca; sí costillares, pollo, carbón, restante
+    // Abuelo Coni: No mote/huesillos/chancaca; sí asado carnes, carbón, pan choripán, restante
     // Empanadas: Asignadas individualmente según compra de Joaquín
     function getDefaultState() {
       const state = {};
@@ -629,7 +630,9 @@
             if (m === 'Monse') {
               state[m][item.id] = (item.category !== 'carne');
             } else if (m === 'Myriam') {
-              state[m][item.id] = !['chorizo', 'lomo_liso', 'lomo_vetado', 'pan'].includes(item.id);
+              state[m][item.id] = !['chorizo', 'lomo_liso', 'lomo_vetado', 'pan', 'mote', 'huesillos', 'chancaca_azucar'].includes(item.id);
+            } else if (m === 'Abuelo Coni') {
+              state[m][item.id] = !['mote', 'huesillos', 'chancaca_azucar'].includes(item.id);
             } else {
               state[m][item.id] = true;
             }
@@ -657,8 +660,8 @@
     // INITIALIZATION & LOCALSTORAGE
     // -------------------------------------------------------------
     function init() {
-      // Load matrix from localStorage or default (v9 garantiza defaults correctos de empanadas)
-      const savedMatrix = localStorage.getItem('fp_matrix_state_v9');
+      // Load matrix from localStorage or default (v10 garantiza defaults con exclusión de mote/chancaca para Myriam y Abuelo Coni)
+      const savedMatrix = localStorage.getItem('fp_matrix_state_v10');
       if (savedMatrix) {
         try {
           matrixState = JSON.parse(savedMatrix);
@@ -685,7 +688,7 @@
       }
 
       // Load paid status
-      const savedPaid = localStorage.getItem('fp_paid_status_v9') || localStorage.getItem('fp_paid_status_v8') || localStorage.getItem('fp_paid_status_v7');
+      const savedPaid = localStorage.getItem('fp_paid_status_v10') || localStorage.getItem('fp_paid_status_v9') || localStorage.getItem('fp_paid_status_v8') || localStorage.getItem('fp_paid_status_v7');
       if (savedPaid) {
         try {
           paidStatus = JSON.parse(savedPaid);
@@ -715,8 +718,8 @@
     }
 
     function saveState() {
-      localStorage.setItem('fp_matrix_state_v9', JSON.stringify(matrixState));
-      localStorage.setItem('fp_paid_status_v9', JSON.stringify(paidStatus));
+      localStorage.setItem('fp_matrix_state_v10', JSON.stringify(matrixState));
+      localStorage.setItem('fp_paid_status_v10', JSON.stringify(paidStatus));
     }
 
     function resetToDefaults() {
@@ -838,6 +841,17 @@
         }
       });
 
+      let totalTransfersToIgnacio = 0;
+      let joaquinNetSurplus = 0;
+      MEMBERS_DEF.forEach(m => {
+        if (m === 'Joaquín') {
+          joaquinNetSurplus = memberQuotas[m].netSurplus;
+        } else if (m !== 'Ignacio' && m !== 'Quena') {
+          totalTransfersToIgnacio += memberQuotas[m].netToTransfer;
+        }
+      });
+      const ignacioNetRecovery = totalTransfersToIgnacio - joaquinNetSurplus;
+
       return {
         itemCounts,
         itemPerPerson,
@@ -846,7 +860,10 @@
         memberBreakdowns,
         grandTotalAssigned,
         totalPaidAmount,
-        paidCount
+        paidCount,
+        totalTransfersToIgnacio,
+        joaquinNetSurplus,
+        ignacioNetRecovery
       };
     }
 
@@ -927,7 +944,7 @@
         } else if (isJoaquin) {
           minAmountHtml = `<span class="text-xs text-blue-800 font-medium">Saldo a favor (te transfieren): <strong class="text-blue-700 font-black text-sm sm:text-base">+${clp.format(q.netSurplus)}</strong></span>`;
         } else if (isIgnacio) {
-          minAmountHtml = `<span class="text-xs text-slate-500 font-medium">Monto a recuperar: <strong class="text-emerald-700 font-black text-sm sm:text-base">$164.686</strong></span>`;
+          minAmountHtml = `<span class="text-xs text-slate-500 font-medium">Monto a recuperar: <strong class="text-emerald-700 font-black text-sm sm:text-base">${clp.format(calc.ignacioNetRecovery)}</strong></span>`;
         } else {
           minAmountHtml = `<span class="text-xs text-slate-500 font-medium">Monto a transferir a Ignacio: <strong class="text-slate-900 font-black text-sm sm:text-base">${clp.format(q.netToTransfer)}</strong></span>`;
         }
@@ -1040,16 +1057,16 @@
               </div>
               <div class="flex justify-between text-emerald-700 font-semibold">
                 <span>Recaudas de 13 familiares:</span>
-                <span>+$193.121</span>
+                <span>+${clp.format(calc.totalTransfersToIgnacio)}</span>
               </div>
               <div class="flex justify-between text-amber-700 font-semibold border-b border-slate-200 pb-1">
                 <span>Transfieres a Joaquín (saldo a su favor):</span>
-                <span>-$28.435</span>
+                <span>-${clp.format(calc.joaquinNetSurplus)}</span>
               </div>
               <div class="flex items-baseline justify-between pt-1">
                 <span class="text-xs font-bold text-slate-700">Recuperación neta compras:</span>
                 <div class="text-right">
-                  <span class="text-2xl font-black text-emerald-700">$164.686</span>
+                  <span class="text-2xl font-black text-emerald-700">${clp.format(calc.ignacioNetRecovery)}</span>
                   <span class="block text-[10px] text-emerald-700 font-bold">¡Quedas 100% saldado!</span>
                 </div>
               </div>
@@ -1273,9 +1290,9 @@
         msg += `Hola Ignacio! 👋 Eres el organizador de las compras dieciocheras.\n\n`;
         msg += `🛒 *Total aportado de tu bolsillo:* $183.392 (2 boletas)\n`;
         msg += `🥩 *Tu consumo personal:* ${clp.format(q.baseRounded)}\n`;
-        msg += `💰 *Monto a recuperar de tus compras:* $164.686\n`;
-        msg += `📥 *Total a recaudar de la familia (13 personas):* $193.121\n`;
-        msg += `📤 *Transferencia que le haces a Joaquín (saldo a su favor):* $28.435\n\n`;
+        msg += `💰 *Monto a recuperar de tus compras:* ${clp.format(calc.ignacioNetRecovery)}\n`;
+        msg += `📥 *Total a recaudar de la familia (13 personas):* ${clp.format(calc.totalTransfersToIgnacio)}\n`;
+        msg += `📤 *Transferencia que le haces a Joaquín (saldo a su favor):* ${clp.format(calc.joaquinNetSurplus)}\n\n`;
         msg += `¡Todo cuadrado al peso sin transferencias cruzadas! 🎉`;
         return msg;
       }
@@ -1363,7 +1380,7 @@
         }
       });
 
-      msg += `\n💵 *Cuentas Claras:* Todos le transfieren únicamente a Ignacio ($193.121 en total). Ignacio recupera sus compras ($164.686) y le transfiere el saldo a favor a Joaquín ($28.435).\n`;
+      msg += `\n💵 *Cuentas Claras:* Todos le transfieren únicamente a Ignacio (${clp.format(calc.totalTransfersToIgnacio)} en total). Ignacio recupera sus compras (${clp.format(calc.ignacioNetRecovery)}) y le transfiere el saldo a favor a Joaquín (${clp.format(calc.joaquinNetSurplus)}).\n`;
       msg += buildBankText();
       msg += `\n\n¡Por favor avisar al transferir para ir marcando la lista! Gracias a todos! 🇨🇱🎉`;
 

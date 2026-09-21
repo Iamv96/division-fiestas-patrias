@@ -148,8 +148,10 @@ for m in integrantes:
     elif m == 'Myriam':
         consumo[m] += [
             'Costillar Chileno', 'Costillar cerdo', 'Trutro', 'Pechuga', 
-            'Carbón', 'Trigo Mote (1kg)', 'Huesillos (1kg)', 'Chancaca y Azúcar', 'Restante'
+            'Carbón', 'Restante'
         ]
+    elif m == 'Abuelo Coni':
+        consumo[m] += [it for it in asado_items if it not in ['Trigo Mote (1kg)', 'Huesillos (1kg)', 'Chancaca y Azúcar']]
     else:
         consumo[m] += list(asado_items)
     
