@@ -752,18 +752,19 @@
         const isPamelaOrAle = (m === 'Pamela' || m === 'Ale');
         const isExpanded = !!expandedCards[m];
 
-        // Badge if special buyer or sponsored
-        let buyerBadge = '';
+        // Badges: Sponsor of Quena + Purchase/Special badge
+        const isSponsorQuena = SPONSORS_QUENA.includes(m);
+        const quenaBadgeHtml = isSponsorQuena ? `<span class="inline-flex items-center px-1.5 py-0.5 rounded-lg text-[10px] font-bold bg-purple-100 text-purple-800 border border-purple-200 whitespace-nowrap shrink-0">Aporta 1/4 cuota Quena</span>` : '';
+
+        let extraBadgeHtml = '';
         if (isIgnacio) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200">Aportó $183.392</span>`;
+          extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200 whitespace-nowrap shrink-0">Aportó $183.392</span>`;
         } else if (isMindy) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-purple-100 text-purple-800 border border-purple-200">Aporta 1/4 cuota Quena</span> <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">Aportó $11.790 en compras</span>`;
+          extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 whitespace-nowrap shrink-0">Aportó $11.790 en compras</span>`;
         } else if (isJoaquin) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-purple-100 text-purple-800 border border-purple-200">Aporta 1/4 cuota Quena</span> <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-indigo-100 text-indigo-900 border border-indigo-300">Aportó $51.820 en compras</span>`;
+          extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-indigo-100 text-indigo-900 border border-indigo-300 whitespace-nowrap shrink-0">Aportó $51.820 en compras</span>`;
         } else if (isQuena) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200">Cuota cubierta por familiares</span>`;
-        } else if (isPamelaOrAle) {
-          buyerBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-purple-100 text-purple-800 border border-purple-200">Aporta 1/4 cuota Quena</span>`;
+          extraBadgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200 whitespace-nowrap shrink-0">Cuota cubierta por familiares</span>`;
         }
 
         // Minimized display amount text
@@ -940,16 +941,19 @@
         }
 
         const card = document.createElement('div');
-        card.className = `rounded-2xl p-4 sm:p-5 shadow-sm border transition-all duration-200 cursor-pointer select-none ${cardBgClass}`;
+        card.className = `rounded-2xl p-3.5 sm:p-5 shadow-sm border transition-all duration-200 cursor-pointer select-none ${cardBgClass}`;
         card.onclick = () => toggleCardExpand(m);
 
         card.innerHTML = `
           <!-- Header / Minimized Summary -->
-          <div class="flex items-center justify-between gap-3">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2 flex-wrap">
-                <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug">${m}</h3>
-                ${buyerBadge}
+          <div class="flex items-center justify-between gap-2 sm:gap-3">
+            <div class="space-y-1 min-w-0 flex-1">
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                <div class="inline-flex items-center gap-1.5 flex-nowrap shrink-0">
+                  <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug whitespace-nowrap">${m}</h3>
+                  ${quenaBadgeHtml}
+                </div>
+                ${extraBadgeHtml}
               </div>
               <div>
                 ${minAmountHtml}
@@ -957,13 +961,13 @@
             </div>
 
             <!-- Status Badge & Expand Chevron -->
-            <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold select-none pointer-events-none ${statusBtnClass}">
+            <div class="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
+              <span class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border text-[11px] sm:text-xs font-bold select-none pointer-events-none whitespace-nowrap ${statusBtnClass}">
                 <span>${statusBtnText}</span>
               </span>
 
-              <div id="card-chevron-${m}" class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 transition-transform duration-200 ${isExpanded ? 'rotate-180 bg-blue-50 text-blue-700' : ''}">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+              <div id="card-chevron-${m}" class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 transition-transform duration-200 ${isExpanded ? 'rotate-180 bg-blue-50 text-blue-700' : ''}">
+                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
               </div>
             </div>
           </div>
