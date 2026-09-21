@@ -962,11 +962,15 @@
           <!-- Header / Minimized Summary -->
           <div class="flex items-center justify-between gap-2 sm:gap-3">
             <div class="space-y-1 min-w-0 flex-1">
-              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+              <div>
                 <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug whitespace-nowrap">${m}</h3>
-                ${extraBadgeHtml}
               </div>
-              ${quenaBadgeHtml ? `<div>${quenaBadgeHtml}</div>` : ''}
+              ${(extraBadgeHtml || quenaBadgeHtml) ? `
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  ${extraBadgeHtml}
+                  ${quenaBadgeHtml}
+                </div>
+              ` : ''}
               <div>
                 ${minAmountHtml}
               </div>
