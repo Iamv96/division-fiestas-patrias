@@ -49,19 +49,19 @@
   <!-- TOP HEADER -->
   <header class="bg-gradient-to-r from-chileBlue via-blue-900 to-red-700 text-white shadow-lg sticky top-0 z-50">
     <div class="w-full max-w-[98%] 2xl:max-w-[1760px] mx-auto px-3 sm:px-6 lg:px-8 py-3.5">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-        <div class="flex items-center space-x-3">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4 text-left">
+        <div class="flex items-center space-x-3 text-left">
           <div class="bg-white/10 p-2.5 rounded-2xl backdrop-blur-md border border-white/20 shadow-inner flex items-center justify-center text-2xl sm:text-3xl">
             🇨🇱
           </div>
-          <div>
+          <div class="text-left">
             <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Fiestas patrias</h1>
             <p class="text-blue-100 text-xs sm:text-sm font-medium">División de gastos de asado familiar</p>
           </div>
         </div>
         
         <!-- Botón Datos Bancarios Más Largo y Centrado Horizontalmente -->
-        <div class="w-full sm:w-auto flex justify-center">
+        <div class="w-full md:w-auto flex justify-center">
           <button onclick="openBankModal()" class="w-full max-w-sm sm:w-80 px-6 py-2.5 bg-white/15 hover:bg-white/25 active:scale-95 transition-all text-white text-xs sm:text-sm font-bold rounded-xl border border-white/30 gap-2.5 backdrop-blur-md shadow-sm flex items-center justify-center">
             <svg class="w-4 h-4 text-amber-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
             <span>Datos Bancarios</span>
@@ -1277,13 +1277,12 @@
     }
 
     function copyAllBankDetails() {
-      const text = `Datos para transferir a Ignacio:
-• Nombre: IGNACIO ALEJANDRO MOLINA VASQUEZ
-• RUT: 19.265.355-K
-• Banco: Bci / Banco Crédito e Inversiones
-• Tipo de cuenta: Cuenta Corriente
-• N° Cuenta: 777919265355
-• Email: ignaciomolinavasquez@outlook.com`;
+      const text = `IGNACIO ALEJANDRO MOLINA VASQUEZ
+19.265.355-K
+Bci / Banco Crédito e Inversiones
+Cuenta Corriente
+777919265355
+ignaciomolinavasquez@outlook.com`;
       navigator.clipboard.writeText(text).then(() => {
         showToast('✓ Datos bancarios copiados al portapapeles');
       }).catch(() => {
