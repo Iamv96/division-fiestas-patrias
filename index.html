@@ -163,7 +163,7 @@
           <h2 class="text-base sm:text-lg font-bold text-slate-900">Comprobantes y Desglose de Compras</h2>
         </div>
         <p class="text-xs sm:text-sm text-slate-600 mt-1">
-          A continuación se presenta el detalle de cada una de las 5 compras realizadas, los productos adquiridos y sus respaldos oficiales.
+          A continuación se presenta el detalle de cada una de las 6 compras realizadas, los productos adquiridos y sus respaldos oficiales.
         </p>
       </div>
 
@@ -271,24 +271,23 @@
             </div>
             <div>
               <p class="text-xs text-slate-500 font-semibold uppercase">Monto Total</p>
-              <p class="text-2xl font-black text-slate-900 mt-0.5">$11.790</p>
+              <p class="text-2xl font-black text-slate-900 mt-0.5">$8.400</p>
             </div>
             <div class="border-t border-slate-100 pt-3 space-y-1.5 text-xs text-slate-600">
               <p class="font-bold text-slate-700 mb-1">Productos adquiridos:</p>
-              <div class="flex justify-between py-0.5 border-b border-slate-50"><span>🪵 Carbón para asado:</span><span class="font-semibold text-slate-800">$8.400</span></div>
-              <div class="flex justify-between py-0.5"><span>🍯 Chancaca y Azúcar:</span><span class="font-semibold text-slate-800">$3.390</span></div>
+              <div class="flex justify-between py-0.5"><span>🪵 Carbón para asado:</span><span class="font-semibold text-slate-800">$8.400</span></div>
             </div>
           </div>
           <!-- Respaldo / Comprobante -->
           <div class="pt-3 border-t border-slate-100 space-y-2">
             <div class="flex items-center justify-between text-xs">
               <span class="font-bold text-slate-700">Respaldo oficial:</span>
-              <button type="button" onclick="openReceiptModal('comprobantes/compra3_carbon_mindy.jpg', 'Compra #3 • Mindy ($11.790)', 'Comprobante Mercado Pago Carbón ($8.400)')" class="text-amber-700 hover:text-amber-900 font-semibold inline-flex items-center gap-1 transition-colors">
+              <button type="button" onclick="openReceiptModal('comprobantes/compra3_carbon_mindy.jpg', 'Compra #3 (Carbón) • Mindy ($8.400)', 'Comprobante Mercado Pago Carbón para asado')" class="text-amber-700 hover:text-amber-900 font-semibold inline-flex items-center gap-1 transition-colors">
                 <span>Ampliar</span>
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
               </button>
             </div>
-            <div class="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 bg-slate-50 hover:border-amber-400 transition-all shadow-2xs" onclick="openReceiptModal('comprobantes/compra3_carbon_mindy.jpg', 'Compra #3 • Mindy ($11.790)', 'Comprobante Mercado Pago Carbón ($8.400)')">
+            <div class="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 bg-slate-50 hover:border-amber-400 transition-all shadow-2xs" onclick="openReceiptModal('comprobantes/compra3_carbon_mindy.jpg', 'Compra #3 (Carbón) • Mindy ($8.400)', 'Comprobante Mercado Pago Carbón para asado')">
               <img src="comprobantes/compra3_carbon_mindy.jpg" alt="Comprobante Carbón Mindy" class="w-full h-44 object-cover object-top group-hover:scale-102 transition-transform duration-300">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-2.5">
                 <span class="text-xs font-bold text-white bg-slate-900/85 px-3 py-1 rounded-lg backdrop-blur-xs flex items-center gap-1.5 shadow-sm">
@@ -305,8 +304,41 @@
         <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-xl text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                Compra #4 • Mindy
+              </span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">✓ Verificada</span>
+            </div>
+            <div>
+              <p class="text-xs text-slate-500 font-semibold uppercase">Monto Total</p>
+              <p class="text-2xl font-black text-slate-900 mt-0.5">$3.390</p>
+            </div>
+            <div class="border-t border-slate-100 pt-3 space-y-1.5 text-xs text-slate-600">
+              <p class="font-bold text-slate-700 mb-1">Productos adquiridos:</p>
+              <div class="flex justify-between py-0.5"><span>🍯 Chancaca y Azúcar:</span><span class="font-semibold text-slate-800">$3.390</span></div>
+            </div>
+          </div>
+          <!-- Respaldo / Comprobante -->
+          <div class="pt-3 border-t border-slate-100 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-700">Respaldo oficial:</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">✓ Rendida</span>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4 border border-dashed border-slate-300 text-center space-y-1">
+              <div class="text-2xl">🍯</div>
+              <p class="text-xs font-semibold text-slate-700">Insumos para mote con huesillo</p>
+              <p class="text-[11px] text-slate-500">Boleta registrada por Mindy ($3.390)</p>
+            </div>
+            <p class="text-[11px] text-slate-500 text-center font-medium">📄 Boleta registrada por Mindy</p>
+          </div>
+        </div>
+
+        <!-- Compra 5 -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
               <span class="inline-flex items-center px-2.5 py-1 rounded-xl text-xs font-bold bg-indigo-100 text-indigo-900 border border-indigo-300">
-                Compra #4 • Joaquín
+                Compra #5 • Joaquín
               </span>
               <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">✓ Verificada</span>
             </div>
@@ -323,12 +355,12 @@
           <div class="pt-3 border-t border-slate-100 space-y-2">
             <div class="flex items-center justify-between text-xs">
               <span class="font-bold text-slate-700">Respaldo oficial:</span>
-              <button type="button" onclick="openReceiptModal('comprobantes/compra4_pan_joaquin.jpg', 'Compra #4 • Joaquín ($5.570)', 'Comprobante Panadería Santa Bianca')" class="text-indigo-700 hover:text-indigo-900 font-semibold inline-flex items-center gap-1 transition-colors">
+              <button type="button" onclick="openReceiptModal('comprobantes/compra4_pan_joaquin.jpg', 'Compra #5 • Joaquín ($5.570)', 'Comprobante Panadería Santa Bianca')" class="text-indigo-700 hover:text-indigo-900 font-semibold inline-flex items-center gap-1 transition-colors">
                 <span>Ampliar</span>
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
               </button>
             </div>
-            <div class="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 bg-slate-50 hover:border-indigo-400 transition-all shadow-2xs" onclick="openReceiptModal('comprobantes/compra4_pan_joaquin.jpg', 'Compra #4 • Joaquín ($5.570)', 'Comprobante Panadería Santa Bianca')">
+            <div class="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 bg-slate-50 hover:border-indigo-400 transition-all shadow-2xs" onclick="openReceiptModal('comprobantes/compra4_pan_joaquin.jpg', 'Compra #5 • Joaquín ($5.570)', 'Comprobante Panadería Santa Bianca')">
               <img src="comprobantes/compra4_pan_joaquin.jpg" alt="Comprobante Pan Joaquín" class="w-full h-44 object-cover object-top group-hover:scale-102 transition-transform duration-300">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-2.5">
                 <span class="text-xs font-bold text-white bg-slate-900/85 px-3 py-1 rounded-lg backdrop-blur-xs flex items-center gap-1.5 shadow-sm">
@@ -341,12 +373,12 @@
           </div>
         </div>
 
-        <!-- Compra 5 -->
+        <!-- Compra 6 -->
         <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4">
           <div class="space-y-3">
             <div class="flex items-center justify-between">
               <span class="inline-flex items-center px-2.5 py-1 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-900 border border-emerald-300">
-                Compra #5 (Empanadas) • Joaquín
+                Compra #6 (Empanadas) • Joaquín
               </span>
               <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">✓ Verificada</span>
             </div>
@@ -367,12 +399,12 @@
           <div class="pt-3 border-t border-slate-100 space-y-2">
             <div class="flex items-center justify-between text-xs">
               <span class="font-bold text-slate-700">Respaldo oficial:</span>
-              <button type="button" onclick="openReceiptModal('comprobantes/compra5_empanadas_joaquin.jpg', 'Compra #5 (Empanadas) • Joaquín ($46.250)', 'Comprobante 18 Empanadas Merpago*vanessaaguayo')" class="text-emerald-700 hover:text-emerald-900 font-semibold inline-flex items-center gap-1 transition-colors">
+              <button type="button" onclick="openReceiptModal('comprobantes/compra5_empanadas_joaquin.jpg', 'Compra #6 (Empanadas) • Joaquín ($46.250)', 'Comprobante 18 Empanadas Merpago*vanessaaguayo')" class="text-emerald-700 hover:text-emerald-900 font-semibold inline-flex items-center gap-1 transition-colors">
                 <span>Ampliar</span>
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
               </button>
             </div>
-            <div class="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 bg-slate-50 hover:border-emerald-400 transition-all shadow-2xs" onclick="openReceiptModal('comprobantes/compra5_empanadas_joaquin.jpg', 'Compra #5 (Empanadas) • Joaquín ($46.250)', 'Comprobante 18 Empanadas Merpago*vanessaaguayo')">
+            <div class="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 bg-slate-50 hover:border-emerald-400 transition-all shadow-2xs" onclick="openReceiptModal('comprobantes/compra5_empanadas_joaquin.jpg', 'Compra #6 (Empanadas) • Joaquín ($46.250)', 'Comprobante 18 Empanadas Merpago*vanessaaguayo')">
               <img src="comprobantes/compra5_empanadas_joaquin.jpg" alt="Comprobante Empanadas Joaquín" class="w-full h-44 object-cover object-top group-hover:scale-102 transition-transform duration-300">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-2.5">
                 <span class="text-xs font-bold text-white bg-slate-900/85 px-3 py-1 rounded-lg backdrop-blur-xs flex items-center gap-1.5 shadow-sm">
@@ -391,7 +423,7 @@
       <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 space-y-4">
         <div>
           <h3 class="text-base font-bold text-slate-900">Tabla General de Compras & Costo por Comensal</h3>
-          <p class="text-xs text-slate-500">Detalle consolidado de los 19 ítems distribuidos entre las 5 compras ingresadas</p>
+          <p class="text-xs text-slate-500">Detalle consolidado de los 19 ítems distribuidos entre las 6 compras ingresadas</p>
         </div>
 
         <div class="overflow-x-auto">
@@ -401,9 +433,10 @@
                 <th class="p-3">Ítem / Producto</th>
                 <th class="p-3 text-right">Compra 1 (Ignacio)</th>
                 <th class="p-3 text-right">Compra 2 (Ignacio)</th>
-                <th class="p-3 text-right text-amber-700">Compra 3 (Mindy)</th>
-                <th class="p-3 text-right text-indigo-700">Compra 4 (Joaquín)</th>
-                <th class="p-3 text-right text-emerald-700">Compra 5 (Empanadas)</th>
+                <th class="p-3 text-right text-amber-700">Compra 3 (Carbón - Mindy)</th>
+                <th class="p-3 text-right text-amber-700">Compra 4 (Chancaca - Mindy)</th>
+                <th class="p-3 text-right text-indigo-700">Compra 5 (Pan - Joaquín)</th>
+                <th class="p-3 text-right text-emerald-700">Compra 6 (Empanadas - Joaquín)</th>
                 <th class="p-3 text-right">Total Gastado</th>
                 <th class="p-3 text-center">Consumidores Activos</th>
                 <th class="p-3 text-right">Cuota Unitaria Actual</th>
@@ -417,9 +450,10 @@
                 <td class="p-3">TOTAL GENERAL</td>
                 <td class="p-3 text-right text-blue-900" id="c1-total-display">$122.251</td>
                 <td class="p-3 text-right text-blue-900" id="c2-total-display">$61.141</td>
-                <td class="p-3 text-right text-amber-700" id="c3-total-display">$11.790</td>
-                <td class="p-3 text-right text-indigo-700" id="c4-total-display">$5.570</td>
-                <td class="p-3 text-right text-emerald-700" id="c5-total-display">$46.250</td>
+                <td class="p-3 text-right text-amber-700" id="c3-total-display">$8.400</td>
+                <td class="p-3 text-right text-amber-700" id="c4-total-display">$3.390</td>
+                <td class="p-3 text-right text-indigo-700" id="c5-total-display">$5.570</td>
+                <td class="p-3 text-right text-emerald-700" id="c6-total-display">$46.250</td>
                 <td class="p-3 text-right text-emerald-700 text-base" id="total-compras-display">$247.002</td>
                 <td class="p-3 text-center">-</td>
                 <td class="p-3 text-right text-emerald-700 text-base" id="total-cuotas-display">$247.002</td>
@@ -551,25 +585,25 @@
     // DATA DEFINITIONS & INITIAL STATE
     // -------------------------------------------------------------
     const ITEMS_DEF = [
-      { id: 'chorizo', name: 'Chorizo', category: 'carne', c1: 14670, c2: 4890, c3: 0, c4: 0, c5: 0, total: 19560, icon: '🌭' },
-      { id: 'lomo_liso', name: 'Lomo Liso', category: 'carne', c1: 21226, c2: 0, c3: 0, c4: 0, c5: 0, total: 21226, icon: '🥩' },
-      { id: 'lomo_vetado', name: 'Lomo Vetado', category: 'carne', c1: 19560, c2: 33693, c3: 0, c4: 0, c5: 0, total: 53253, icon: '🥩' },
-      { id: 'costillar_chileno', name: 'Costillar Chileno', category: 'carne', c1: 19238, c2: 0, c3: 0, c4: 0, c5: 0, total: 19238, icon: '🍖' },
-      { id: 'costillar_cerdo', name: 'Costillar Cerdo', category: 'carne', c1: 14957, c2: 0, c3: 0, c4: 0, c5: 0, total: 14957, icon: '🍖' },
-      { id: 'trutro', name: 'Trutro Pollo', category: 'carne', c1: 0, c2: 16353, c3: 0, c4: 0, c5: 0, total: 16353, icon: '🍗' },
-      { id: 'pechuga', name: 'Pechuga Pollo', category: 'carne', c1: 0, c2: 6205, c3: 0, c4: 0, c5: 0, total: 6205, icon: '🍗' },
-      { id: 'carbon', name: 'Carbón', category: 'carne', c1: 0, c2: 0, c3: 8400, c4: 0, c5: 0, total: 8400, icon: '🪵' },
-      { id: 'pan', name: 'Pan Choripán', category: 'carne', c1: 0, c2: 0, c3: 0, c4: 5570, c5: 0, total: 5570, icon: '🥖' },
-      { id: 'mote', name: 'Trigo Mote (1kg)', category: 'mote', c1: 2490, c2: 0, c3: 0, c4: 0, c5: 0, total: 2490, icon: '🌾' },
-      { id: 'huesillos', name: 'Huesillos (1kg)', category: 'mote', c1: 10990, c2: 0, c3: 0, c4: 0, c5: 0, total: 10990, icon: '🍑' },
-      { id: 'chancaca_azucar', name: 'Chancaca y Azúcar', category: 'mote', c1: 0, c2: 0, c3: 3390, c4: 0, c5: 0, total: 3390, icon: '🍯' },
-      { id: 'restante', name: 'Restante', category: 'restante', c1: 19120, c2: 0, c3: 0, c4: 0, c5: 0, total: 19120, icon: '🥤' },
-      { id: 'pino_1', name: 'Pino (1ª)', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 17500, total: 17500, icon: '🥟' },
-      { id: 'pino_2', name: 'Pino (2ª)', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 15000, total: 15000, icon: '🥟' },
-      { id: 'mechada', name: 'Mechada Queso', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 6000, total: 6000, icon: '🥟' },
-      { id: 'camaron_queso', name: 'Camarón Queso', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 3000, total: 3000, icon: '🥟' },
-      { id: 'queso', name: 'Empanada Queso', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 2250, total: 2250, icon: '🥟' },
-      { id: 'napolitana', name: 'Napolitana', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 2500, total: 2500, icon: '🥟' }
+      { id: 'chorizo', name: 'Chorizo', category: 'carne', c1: 14670, c2: 4890, c3: 0, c4: 0, c5: 0, c6: 0, total: 19560, icon: '🌭' },
+      { id: 'lomo_liso', name: 'Lomo Liso', category: 'carne', c1: 21226, c2: 0, c3: 0, c4: 0, c5: 0, c6: 0, total: 21226, icon: '🥩' },
+      { id: 'lomo_vetado', name: 'Lomo Vetado', category: 'carne', c1: 19560, c2: 33693, c3: 0, c4: 0, c5: 0, c6: 0, total: 53253, icon: '🥩' },
+      { id: 'costillar_chileno', name: 'Costillar Chileno', category: 'carne', c1: 19238, c2: 0, c3: 0, c4: 0, c5: 0, c6: 0, total: 19238, icon: '🍖' },
+      { id: 'costillar_cerdo', name: 'Costillar Cerdo', category: 'carne', c1: 14957, c2: 0, c3: 0, c4: 0, c5: 0, c6: 0, total: 14957, icon: '🍖' },
+      { id: 'trutro', name: 'Trutro Pollo', category: 'carne', c1: 0, c2: 16353, c3: 0, c4: 0, c5: 0, c6: 0, total: 16353, icon: '🍗' },
+      { id: 'pechuga', name: 'Pechuga Pollo', category: 'carne', c1: 0, c2: 6205, c3: 0, c4: 0, c5: 0, c6: 0, total: 6205, icon: '🍗' },
+      { id: 'carbon', name: 'Carbón', category: 'carne', c1: 0, c2: 0, c3: 8400, c4: 0, c5: 0, c6: 0, total: 8400, icon: '🪵' },
+      { id: 'pan', name: 'Pan Choripán', category: 'carne', c1: 0, c2: 0, c3: 0, c4: 0, c5: 5570, c6: 0, total: 5570, icon: '🥖' },
+      { id: 'mote', name: 'Trigo Mote (1kg)', category: 'mote', c1: 2490, c2: 0, c3: 0, c4: 0, c5: 0, c6: 0, total: 2490, icon: '🌾' },
+      { id: 'huesillos', name: 'Huesillos (1kg)', category: 'mote', c1: 10990, c2: 0, c3: 0, c4: 0, c5: 0, c6: 0, total: 10990, icon: '🍑' },
+      { id: 'chancaca_azucar', name: 'Chancaca y Azúcar', category: 'mote', c1: 0, c2: 0, c3: 0, c4: 3390, c5: 0, c6: 0, total: 3390, icon: '🍯' },
+      { id: 'restante', name: 'Restante', category: 'restante', c1: 19120, c2: 0, c3: 0, c4: 0, c5: 0, c6: 0, total: 19120, icon: '🥤' },
+      { id: 'pino_1', name: 'Pino (1ª)', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, c6: 17500, total: 17500, icon: '🥟' },
+      { id: 'pino_2', name: 'Pino (2ª)', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, c6: 15000, total: 15000, icon: '🥟' },
+      { id: 'mechada', name: 'Mechada Queso', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, c6: 6000, total: 6000, icon: '🥟' },
+      { id: 'camaron_queso', name: 'Camarón Queso', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, c6: 3000, total: 3000, icon: '🥟' },
+      { id: 'queso', name: 'Empanada Queso', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, c6: 2250, total: 2250, icon: '🥟' },
+      { id: 'napolitana', name: 'Napolitana', category: 'empanada', c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, c6: 2500, total: 2500, icon: '🥟' }
     ];
 
     const MEMBERS_DEF = [
@@ -1153,8 +1187,9 @@
           <td class="p-3 text-right text-slate-600">${item.c1 > 0 ? clp.format(item.c1) : '-'}</td>
           <td class="p-3 text-right text-slate-600">${item.c2 > 0 ? clp.format(item.c2) : '-'}</td>
           <td class="p-3 text-right text-amber-700 font-medium">${item.c3 > 0 ? clp.format(item.c3) : '-'}</td>
-          <td class="p-3 text-right text-indigo-700 font-medium">${item.c4 > 0 ? clp.format(item.c4) : '-'}</td>
-          <td class="p-3 text-right text-emerald-700 font-medium">${item.c5 > 0 ? clp.format(item.c5) : '-'}</td>
+          <td class="p-3 text-right text-amber-700 font-medium">${item.c4 > 0 ? clp.format(item.c4) : '-'}</td>
+          <td class="p-3 text-right text-indigo-700 font-medium">${item.c5 > 0 ? clp.format(item.c5) : '-'}</td>
+          <td class="p-3 text-right text-emerald-700 font-medium">${item.c6 > 0 ? clp.format(item.c6) : '-'}</td>
           <td class="p-3 text-right font-bold text-slate-900">${clp.format(item.total)}</td>
           <td class="p-3 text-center">
             <span class="inline-flex px-2 py-0.5 rounded-full text-xs font-bold ${count > 0 ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'}">
