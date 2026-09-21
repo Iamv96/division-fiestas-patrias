@@ -294,7 +294,14 @@ def update_excel(file_path):
             c_net = ws3.cell(row=r_idx, column=6, value=f"=IF(D{r_idx}-E{r_idx}>0, D{r_idx}-E{r_idx}, 0)")
             c_net.font = Font(name="Calibri", size=11, bold=True, color="047857")
             c_dest = ws3.cell(row=r_idx, column=7, value="Transfiere a Ignacio")
-            c_status = ws3.cell(row=r_idx, column=8, value="Pendiente")
+            if persona in ["Pamela", "Cote", "Franklin"]:
+                c_status = ws3.cell(row=r_idx, column=8, value="Pagado")
+                c_status.fill = PatternFill(start_color="DCFCE7", end_color="DCFCE7", fill_type="solid")
+                c_status.font = Font(name="Calibri", size=11, bold=True, color="166534")
+            else:
+                c_status = ws3.cell(row=r_idx, column=8, value="Pendiente")
+                c_status.fill = PatternFill(start_color="FEE2E2", end_color="FEE2E2", fill_type="solid")
+                c_status.font = Font(name="Calibri", size=11, color="991B1B")
             
         c_net.number_format = money_format
         c_net.border = thin_border
@@ -303,7 +310,8 @@ def update_excel(file_path):
         c_dest.alignment = Alignment(horizontal="center")
         c_dest.border = thin_border
         
-        c_status.font = regular_font
+        if persona not in ["Pamela", "Cote", "Franklin"]:
+            c_status.font = regular_font
         c_status.alignment = Alignment(horizontal="center")
         c_status.border = thin_border
         

@@ -113,7 +113,7 @@
       <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl py-3 px-4 sm:py-3.5 sm:px-5 shadow-sm border border-emerald-200 hover:shadow-md transition-shadow flex flex-col justify-center">
         <div class="flex items-center justify-between">
           <p class="text-[11px] font-bold tracking-wider text-emerald-800 uppercase">Recaudado</p>
-          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800" id="badge-pagados">0/16</span>
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800" id="badge-pagados">4/16</span>
         </div>
         <div class="flex items-center justify-between gap-3 mt-0.5">
           <p class="text-2xl sm:text-3xl font-extrabold text-emerald-800 leading-tight" id="kpi-total-cobrado">$0</p>
@@ -150,8 +150,8 @@
           <div class="relative min-w-[180px]">
             <select id="card-filter-select" onchange="setCardFilter(this.value)" class="w-full appearance-none bg-slate-50 hover:bg-slate-100 text-slate-800 text-xs sm:text-sm font-semibold rounded-xl pl-3.5 pr-8 py-2 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white cursor-pointer transition-all shadow-xs">
               <option value="all">Todos (16)</option>
-              <option value="pending">Pendientes (16)</option>
-              <option value="paid">Pagados (0)</option>
+              <option value="pending">Pendientes (12)</option>
+              <option value="paid">Pagados (4)</option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-500">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -605,6 +605,8 @@
 
     const SPONSORS_QUENA = ['Pamela', 'Ale', 'Mindy', 'Joaquín'];
 
+    const DEFAULT_PAID_MEMBERS = ['Ignacio', 'Pamela', 'Cote', 'Franklin'];
+
     // Default consumption rules:
     // Monse: Vegetariana (no carnes, no carbón, no pan choripán, no empanadas), sí mote, huesillos, chancaca/azúcar, restante
     // Myriam: No vacuno/chorizo/pan choripán, no mote/huesillos/chancaca; sí costillares, pollo, carbón, restante
@@ -669,7 +671,7 @@
       matrixState = getDefaultState();
 
       // 2. Cargar estado de pagos guardados
-      const savedPaid = localStorage.getItem('fp_paid_status_v10') || localStorage.getItem('fp_paid_status_v9') || localStorage.getItem('fp_paid_status_v8') || localStorage.getItem('fp_paid_status_v7');
+      const savedPaid = localStorage.getItem('fp_paid_status_v11');
       if (savedPaid) {
         try {
           paidStatus = JSON.parse(savedPaid);
@@ -678,9 +680,19 @@
             delete paidStatus['Miriam'];
           }
         } catch (e) { paidStatus = {}; }
+      } else {
+        const oldSaved = localStorage.getItem('fp_paid_status_v10') || localStorage.getItem('fp_paid_status_v9') || localStorage.getItem('fp_paid_status_v8');
+        if (oldSaved) {
+          try {
+            paidStatus = JSON.parse(oldSaved);
+          } catch (e) { paidStatus = {}; }
+        }
+        DEFAULT_PAID_MEMBERS.forEach(m => {
+          paidStatus[m] = true;
+        });
       }
       MEMBERS_DEF.forEach(m => {
-        if (typeof paidStatus[m] !== 'boolean') paidStatus[m] = (m === 'Ignacio');
+        if (typeof paidStatus[m] !== 'boolean') paidStatus[m] = DEFAULT_PAID_MEMBERS.includes(m);
       });
       // Quena pasa a verde/pagado únicamente cuando todos sus aportantes hayan pagado
       paidStatus['Quena'] = SPONSORS_QUENA.every(s => paidStatus[s]);
@@ -694,19 +706,22 @@
         } catch (e) {}
       }
 
+      // Guardar de inmediato para persistir estado v11
+      saveState();
+
       // Render cards & purchases
       recalculateAndRenderAll();
     }
 
     function saveState() {
-      localStorage.setItem('fp_paid_status_v10', JSON.stringify(paidStatus));
+      localStorage.setItem('fp_paid_status_v11', JSON.stringify(paidStatus));
     }
 
     function resetToDefaults() {
       if (confirm('¿Deseas restablecer el registro de pagos a su estado inicial?')) {
         matrixState = getDefaultState();
         paidStatus = {};
-        MEMBERS_DEF.forEach(m => paidStatus[m] = (m === 'Ignacio'));
+        MEMBERS_DEF.forEach(m => paidStatus[m] = DEFAULT_PAID_MEMBERS.includes(m));
         paidStatus['Quena'] = SPONSORS_QUENA.every(s => paidStatus[s]);
         saveState();
         recalculateAndRenderAll();
@@ -1112,9 +1127,15 @@
 
             <!-- Status Badge & Expand Chevron -->
             <div class="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
-              <span class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border text-[11px] sm:text-xs font-bold select-none pointer-events-none whitespace-nowrap ${statusBtnClass}">
-                <span>${statusBtnText}</span>
-              </span>
+              ${isQuena ? `
+                <span class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border text-[11px] sm:text-xs font-bold select-none whitespace-nowrap ${statusBtnClass}" title="La cuota de Quena se cubre automáticamente al pagar sus 4 aportantes">
+                  <span>${statusBtnText}</span>
+                </span>
+              ` : `
+                <button type="button" onclick="event.stopPropagation(); togglePaidStatus('${m}', ${!isPaid})" title="${isPaid ? 'Clic para marcar como pendiente' : 'Clic para marcar como pagado'}" class="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border text-[11px] sm:text-xs font-bold select-none whitespace-nowrap cursor-pointer transition-all hover:scale-105 active:scale-95 shadow-xs ${statusBtnClass}">
+                  <span>${statusBtnText}</span>
+                </button>
+              `}
 
               <div id="card-chevron-${m}" class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 transition-transform duration-200 ${isExpanded ? 'rotate-180 bg-blue-50 text-blue-700' : ''}">
                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
@@ -1222,6 +1243,7 @@
       paidStatus['Quena'] = SPONSORS_QUENA.every(s => paidStatus[s]);
       saveState();
       recalculateAndRenderAll();
+      showToast(`${member}: marcado como ${status ? '✓ Pagado' : '⏳ Pendiente'}`);
     }
 
     function setCardFilter(filter) {
