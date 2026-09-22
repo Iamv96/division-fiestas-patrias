@@ -281,22 +281,26 @@ def update_excel(file_path):
             c_status = ws3.cell(row=r_idx, column=8, value="Organizador")
         elif persona == "Quena":
             c_net = ws3.cell(row=r_idx, column=6, value=0)
-            c_net.font = Font(name="Calibri", size=11, bold=True, color="6B7280")
+            c_net.font = Font(name="Calibri", size=11, bold=True, color="047857")
             c_dest = ws3.cell(row=r_idx, column=7, value="Cubierto por familiares")
-            c_status = ws3.cell(row=r_idx, column=8, value="Cubierto")
+            c_status = ws3.cell(row=r_idx, column=8, value="Cubierto (100%)")
+            c_status.fill = PatternFill(start_color="DCFCE7", end_color="DCFCE7", fill_type="solid")
+            c_status.font = Font(name="Calibri", size=11, bold=True, color="166534")
         elif persona == "Joaquín":
             # Saldo a favor
             c_net = ws3.cell(row=r_idx, column=6, value=f"=E{r_idx}-D{r_idx}")
             c_net.font = Font(name="Calibri", size=11, bold=True, color="2563EB")
             c_dest = ws3.cell(row=r_idx, column=7, value="Ignacio le transfiere (Saldo a favor)")
-            c_status = ws3.cell(row=r_idx, column=8, value="A favor (Recibe)")
+            c_status = ws3.cell(row=r_idx, column=8, value="Liquidado")
+            c_status.fill = PatternFill(start_color="DCFCE7", end_color="DCFCE7", fill_type="solid")
+            c_status.font = Font(name="Calibri", size=11, bold=True, color="166534")
         else:
             c_net = ws3.cell(row=r_idx, column=6, value=f"=IF(D{r_idx}-E{r_idx}>0, D{r_idx}-E{r_idx}, 0)")
             c_net.font = Font(name="Calibri", size=11, bold=True, color="047857")
             c_dest = ws3.cell(row=r_idx, column=7, value="Transfiere a Ignacio")
             paid_members = [
                 "Pamela", "Cote", "Franklin", "Mauri", "Mindy",
-                "Gustavo", "Monse", "Papá Mauri", "Mamá Mauri", "Ale"
+                "Gustavo", "Monse", "Papá Mauri", "Mamá Mauri", "Ale", "Joaquín"
             ]
             if persona in paid_members:
                 c_status = ws3.cell(row=r_idx, column=8, value="Pagado")
@@ -314,7 +318,7 @@ def update_excel(file_path):
         c_dest.alignment = Alignment(horizontal="center")
         c_dest.border = thin_border
         
-        if persona not in paid_members:
+        if persona not in paid_members and persona != "Quena":
             c_status.font = regular_font
         c_status.alignment = Alignment(horizontal="center")
         c_status.border = thin_border
