@@ -294,7 +294,11 @@ def update_excel(file_path):
             c_net = ws3.cell(row=r_idx, column=6, value=f"=IF(D{r_idx}-E{r_idx}>0, D{r_idx}-E{r_idx}, 0)")
             c_net.font = Font(name="Calibri", size=11, bold=True, color="047857")
             c_dest = ws3.cell(row=r_idx, column=7, value="Transfiere a Ignacio")
-            if persona in ["Pamela", "Cote", "Franklin"]:
+            paid_members = [
+                "Pamela", "Cote", "Franklin", "Mauri", "Mindy",
+                "Gustavo", "Monse", "Papá Mauri", "Mamá Mauri"
+            ]
+            if persona in paid_members:
                 c_status = ws3.cell(row=r_idx, column=8, value="Pagado")
                 c_status.fill = PatternFill(start_color="DCFCE7", end_color="DCFCE7", fill_type="solid")
                 c_status.font = Font(name="Calibri", size=11, bold=True, color="166534")
@@ -310,7 +314,7 @@ def update_excel(file_path):
         c_dest.alignment = Alignment(horizontal="center")
         c_dest.border = thin_border
         
-        if persona not in ["Pamela", "Cote", "Franklin"]:
+        if persona not in ["Pamela", "Cote", "Franklin", "Mauri", "Mindy", "Gustavo", "Monse", "Papá Mauri", "Mamá Mauri"]:
             c_status.font = regular_font
         c_status.alignment = Alignment(horizontal="center")
         c_status.border = thin_border

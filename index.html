@@ -113,7 +113,7 @@
       <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl py-3 px-4 sm:py-3.5 sm:px-5 shadow-sm border border-emerald-200 hover:shadow-md transition-shadow flex flex-col justify-center">
         <div class="flex items-center justify-between">
           <p class="text-[11px] font-bold tracking-wider text-emerald-800 uppercase">Recaudado</p>
-          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800" id="badge-pagados">4/16</span>
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800" id="badge-pagados">10/16</span>
         </div>
         <div class="flex items-center justify-between gap-3 mt-0.5">
           <p class="text-2xl sm:text-3xl font-extrabold text-emerald-800 leading-tight" id="kpi-total-cobrado">$0</p>
@@ -150,8 +150,8 @@
           <div class="relative min-w-[180px]">
             <select id="card-filter-select" onchange="setCardFilter(this.value)" class="w-full appearance-none bg-slate-50 hover:bg-slate-100 text-slate-800 text-xs sm:text-sm font-semibold rounded-xl pl-3.5 pr-8 py-2 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white cursor-pointer transition-all shadow-xs">
               <option value="all">Todos (16)</option>
-              <option value="pending">Pendientes (12)</option>
-              <option value="paid">Pagados (4)</option>
+              <option value="pending">Pendientes (6)</option>
+              <option value="paid">Pagados (10)</option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-500">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -605,7 +605,10 @@
 
     const SPONSORS_QUENA = ['Pamela', 'Ale', 'Mindy', 'Joaquín'];
 
-    const DEFAULT_PAID_MEMBERS = ['Ignacio', 'Pamela', 'Cote', 'Franklin'];
+    const DEFAULT_PAID_MEMBERS = [
+      'Ignacio', 'Pamela', 'Cote', 'Franklin',
+      'Mauri', 'Mindy', 'Gustavo', 'Monse', 'Papá Mauri', 'Mamá Mauri'
+    ];
 
     // Default consumption rules:
     // Monse: Vegetariana (no carnes, no carbón, no pan choripán, no empanadas), sí mote, huesillos, chancaca/azúcar, restante
@@ -671,7 +674,7 @@
       matrixState = getDefaultState();
 
       // 2. Cargar estado de pagos guardados
-      const savedPaid = localStorage.getItem('fp_paid_status_v11');
+      const savedPaid = localStorage.getItem('fp_paid_status_v12');
       if (savedPaid) {
         try {
           paidStatus = JSON.parse(savedPaid);
@@ -681,7 +684,7 @@
           }
         } catch (e) { paidStatus = {}; }
       } else {
-        const oldSaved = localStorage.getItem('fp_paid_status_v10') || localStorage.getItem('fp_paid_status_v9') || localStorage.getItem('fp_paid_status_v8');
+        const oldSaved = localStorage.getItem('fp_paid_status_v11') || localStorage.getItem('fp_paid_status_v10') || localStorage.getItem('fp_paid_status_v9') || localStorage.getItem('fp_paid_status_v8');
         if (oldSaved) {
           try {
             paidStatus = JSON.parse(oldSaved);
@@ -706,7 +709,7 @@
         } catch (e) {}
       }
 
-      // Guardar de inmediato para persistir estado v11
+      // Guardar de inmediato para persistir estado v12
       saveState();
 
       // Render cards & purchases
@@ -714,7 +717,7 @@
     }
 
     function saveState() {
-      localStorage.setItem('fp_paid_status_v11', JSON.stringify(paidStatus));
+      localStorage.setItem('fp_paid_status_v12', JSON.stringify(paidStatus));
     }
 
     function resetToDefaults() {
