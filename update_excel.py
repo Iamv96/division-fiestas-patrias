@@ -296,7 +296,7 @@ def update_excel(file_path):
             c_dest = ws3.cell(row=r_idx, column=7, value="Transfiere a Ignacio")
             paid_members = [
                 "Pamela", "Cote", "Franklin", "Mauri", "Mindy",
-                "Gustavo", "Monse", "Papá Mauri", "Mamá Mauri"
+                "Gustavo", "Monse", "Papá Mauri", "Mamá Mauri", "Ale"
             ]
             if persona in paid_members:
                 c_status = ws3.cell(row=r_idx, column=8, value="Pagado")
@@ -314,7 +314,7 @@ def update_excel(file_path):
         c_dest.alignment = Alignment(horizontal="center")
         c_dest.border = thin_border
         
-        if persona not in ["Pamela", "Cote", "Franklin", "Mauri", "Mindy", "Gustavo", "Monse", "Papá Mauri", "Mamá Mauri"]:
+        if persona not in paid_members:
             c_status.font = regular_font
         c_status.alignment = Alignment(horizontal="center")
         c_status.border = thin_border
