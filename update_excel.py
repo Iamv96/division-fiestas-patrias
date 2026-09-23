@@ -300,7 +300,8 @@ def update_excel(file_path):
             c_dest = ws3.cell(row=r_idx, column=7, value="Transfiere a Ignacio")
             paid_members = [
                 "Pamela", "Cote", "Franklin", "Mauri", "Mindy",
-                "Gustavo", "Monse", "Papá Mauri", "Mamá Mauri", "Ale", "Joaquín"
+                "Gustavo", "Monse", "Papá Mauri", "Mamá Mauri", "Ale", "Joaquín",
+                "Coni", "Myriam", "Abuelo Coni"
             ]
             if persona in paid_members:
                 c_status = ws3.cell(row=r_idx, column=8, value="Pagado")
